@@ -12,8 +12,17 @@ export type UserAccessToken = {
   refresh_token: string;
 };
 
-export type TrendAPIResponse = {
-  items: [];
+export type ArtistsAPIResponse = {
+  items: Artist[];
+};
+
+export type TracksAPIResponse = {
+  items: Track[];
+};
+
+export type Trends = {
+  artists: Artist[];
+  tracks: Track[];
 };
 
 export type Image = {
