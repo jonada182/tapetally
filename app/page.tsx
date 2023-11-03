@@ -1,113 +1,126 @@
-import Image from 'next/image'
+"use client"
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios"
+import Link from "next/link";
+import { Artist, TokenResponse, Track, TrendAPIResponse } from "./types";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    const [accessToken, setAccessToken] = useState<string | null>(null)
+    const [authCode, setAuthCode] = useState<string | null>(null)
+    const [artists, setArtists] = useState<Artist[] | null>(null)
+    const [tracks, setTracks] = useState<Track[] | null>(null)
+    const [loading, setLoading] = useState(false)
+    const searchParams = useSearchParams()
+    const router = useRouter()
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    const getAccessToken = (code: string) => {
+        axios.post<TokenResponse>("/api/token", { code: code })
+            .then((response) => {
+                const data = response.data;
+                if (data && data.access_token) {
+                    sessionStorage.setItem("access_token", data.access_token)
+                    setAccessToken(data.access_token)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+    const getTrends = (type: "artists" | "tracks") => {
+        setLoading(true)
+        axios.get<TrendAPIResponse>(`https://api.spotify.com/v1/me/top/${type}?limit=10`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response) => {
+            if (response.data) {
+                if (type == "artists") {
+                    setArtists(response.data.items)
+                } else {
+                    setTracks(response.data.items)
+                }
+            }
+        }).catch((error) => {
+            console.log(error.response)
+            if (error.response?.status == 401) {
+                sessionStorage.removeItem("access_token")
+                setAccessToken(null)
+            }
+            console.log(`Error ocurred: %s`, error.message)
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+    useEffect(() => {
+        const storedAccessToken = sessionStorage.getItem("access_token")
+        setAccessToken(storedAccessToken)
+    }, [])
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+    useEffect(() => {
+        if (accessToken) {
+            getTrends("artists")
+            getTrends("tracks")
+        }
+    }, [accessToken])
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    useEffect(() => {
+        const code = searchParams.get("code")
+        const error = searchParams.get("error")
+        if (code && code !== authCode) {
+            setAuthCode(code);
+        } else if (error) {
+            console.log("Error occured:", error)
+        }
+
+        return () => {
+            router.replace(window.location.pathname)
+        }
+    }, [router, searchParams])
+
+    useEffect(() => {
+        if (authCode) {
+            getAccessToken(authCode)
+        }
+    }, [authCode])
+
+    if (loading) {
+        return "Loading..."
+    }
+
+    return (
+        <main className="flex min-h-screen max-w-6xl mx-auto flex-col items-center justify-center p-12">
+            <h1 className="p-4 mb-8 text-4xl">Vinylize Me</h1>
+            {!accessToken ? (
+                <Link className="p-4 text-black bg-white rounded" href="/api/login">Login</Link>
+            ) : (
+                <div className="flex gap-4 justify-stretch w-full flex-grow">
+                    <div className="flex flex-col gap-4 w-1/2 flex-grow">
+                        <h2 className="text-2xl">Top Artists</h2>
+                        {artists && <h2>Top Artists</h2> && artists?.map((artist) => {
+                            return (
+                                <div className="bg-white text-black p-4 rounded flex flex-col align-middle items-center justify-stretch gap-4" key={artist?.id}>
+                                    <h3 className="text-lg">{artist.name}</h3>
+                                    {artist.images && artist.images[0] && <img className="object-cover w-full max-w-xs aspect-square rounded-full" src={artist.images[0]?.url} />}
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="flex flex-col gap-4 w-1/2 flex-grow">
+                        <h2 className="text-2xl">Top Tracks</h2>
+                        {tracks && tracks?.map((track) => {
+                            return (
+                                <div className="bg-white text-black p-4 rounded flex flex-col align-middle items-center justify-stretch gap-4" key={track?.id}>
+                                    <h3 className="text-lg">{`${track.artists[0].name} - ${track.name}`}</h3>
+                                    {track.album.images && track.album.images[0] && <img className="object-cover w-full max-w-xs aspect-square rounded-full" src={track.album.images[0]?.url} />}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+        </main>
+    )
 }
