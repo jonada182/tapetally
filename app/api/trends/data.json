@@ -1,0 +1,701 @@
+{
+    "artists": [
+        {
+            "id": "6FBDaR13swtiWwGhX1WQsP",
+            "name": "blink-182",
+            "href": "https://api.spotify.com/v1/artists/6FBDaR13swtiWwGhX1WQsP",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FBDaR13swtiWwGhX1WQsP"
+            },
+            "genres": [
+                "alternative metal",
+                "modern rock",
+                "pop punk",
+                "punk",
+                "rock",
+                "socal pop punk"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb5da36f8b98dd965336a1507a"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab676161000051745da36f8b98dd965336a1507a"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f1785da36f8b98dd965336a1507a"
+                }
+            ]
+        },
+        {
+            "id": "7ENzCHnmJUr20nUjoZ0zZ1",
+            "name": "Snarky Puppy",
+            "href": "https://api.spotify.com/v1/artists/7ENzCHnmJUr20nUjoZ0zZ1",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7ENzCHnmJUr20nUjoZ0zZ1"
+            },
+            "genres": [
+                "contemporary jazz",
+                "funk rock",
+                "jazz",
+                "progressive jazz fusion"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebae9e6dd153b94058ebf99f6e"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174ae9e6dd153b94058ebf99f6e"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178ae9e6dd153b94058ebf99f6e"
+                }
+            ]
+        },
+        {
+            "id": "7jy3rLJdDQY21OgRLCZ9sD",
+            "name": "Foo Fighters",
+            "href": "https://api.spotify.com/v1/artists/7jy3rLJdDQY21OgRLCZ9sD",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7jy3rLJdDQY21OgRLCZ9sD"
+            },
+            "genres": [
+                "alternative metal",
+                "alternative rock",
+                "modern rock",
+                "permanent wave",
+                "post-grunge",
+                "rock"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebc884df599abc793c116cdf15"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174c884df599abc793c116cdf15"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178c884df599abc793c116cdf15"
+                }
+            ]
+        },
+        {
+            "id": "7Ln80lUS6He07XvHI8qqHH",
+            "name": "Arctic Monkeys",
+            "href": "https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH"
+            },
+            "genres": [
+                "garage rock",
+                "modern rock",
+                "permanent wave",
+                "rock",
+                "sheffield indie"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab676161000051747da39dea0a72f581535fb11f"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f1787da39dea0a72f581535fb11f"
+                }
+            ]
+        },
+        {
+            "id": "1spSxLrhsCFplRSKYdmEz2",
+            "name": "Martin Miller",
+            "href": "https://api.spotify.com/v1/artists/1spSxLrhsCFplRSKYdmEz2",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1spSxLrhsCFplRSKYdmEz2"
+            },
+            "genres": [],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb31aeeefbfb10d8602bbfed34"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000517431aeeefbfb10d8602bbfed34"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f17831aeeefbfb10d8602bbfed34"
+                }
+            ]
+        },
+        {
+            "id": "3USL7r0FYOWUiTPQGz3HpP",
+            "name": "Mark Lettieri",
+            "href": "https://api.spotify.com/v1/artists/3USL7r0FYOWUiTPQGz3HpP",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3USL7r0FYOWUiTPQGz3HpP"
+            },
+            "genres": [
+                "electric bass",
+                "fort worth indie",
+                "jazz fusion"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebca7dc8ed541b45b6e710968f"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174ca7dc8ed541b45b6e710968f"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178ca7dc8ed541b45b6e710968f"
+                }
+            ]
+        },
+        {
+            "id": "6PvScqSJuICxvoA3UDYPmu",
+            "name": "JON VINYL",
+            "href": "https://api.spotify.com/v1/artists/6PvScqSJuICxvoA3UDYPmu",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6PvScqSJuICxvoA3UDYPmu"
+            },
+            "genres": [
+                "canadian contemporary r&b"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb5d9e9d3fc8d1c433ac8f616a"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab676161000051745d9e9d3fc8d1c433ac8f616a"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f1785d9e9d3fc8d1c433ac8f616a"
+                }
+            ]
+        },
+        {
+            "id": "1uiEZYehlNivdK3iQyAbye",
+            "name": "Tom Misch",
+            "href": "https://api.spotify.com/v1/artists/1uiEZYehlNivdK3iQyAbye",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1uiEZYehlNivdK3iQyAbye"
+            },
+            "genres": [
+                "indie soul",
+                "jazz pop"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebb4cda8ca152d4f434f677992"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174b4cda8ca152d4f434f677992"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178b4cda8ca152d4f434f677992"
+                }
+            ]
+        },
+        {
+            "id": "2TSuAchdgVzsAa9wDK1IeT",
+            "name": "Julian Lage",
+            "href": "https://api.spotify.com/v1/artists/2TSuAchdgVzsAa9wDK1IeT",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2TSuAchdgVzsAa9wDK1IeT"
+            },
+            "genres": [
+                "contemporary jazz",
+                "jazz guitar"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb01a8ecd2e827a46dcee1edc0"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000517401a8ecd2e827a46dcee1edc0"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f17801a8ecd2e827a46dcee1edc0"
+                }
+            ]
+        },
+        {
+            "id": "0hEurMDQu99nJRq8pTxO14",
+            "name": "John Mayer",
+            "href": "https://api.spotify.com/v1/artists/0hEurMDQu99nJRq8pTxO14",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0hEurMDQu99nJRq8pTxO14"
+            },
+            "genres": [
+                "neo mellow",
+                "singer-songwriter"
+            ],
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebe926dd683e1700a6d65bd835"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174e926dd683e1700a6d65bd835"
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178e926dd683e1700a6d65bd835"
+                }
+            ]
+        }
+    ],
+    "tracks": [
+        {
+            "id": "6ZX1PCq8GsEkjoDPiw800u",
+            "name": "shelter",
+            "href": "https://api.spotify.com/v1/tracks/6ZX1PCq8GsEkjoDPiw800u",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/6ZX1PCq8GsEkjoDPiw800u"
+            },
+            "album": {
+                "id": "2PQVnh3WyBRkVRzcl2nWBd",
+                "name": "tori",
+                "href": "https://api.spotify.com/v1/albums/2PQVnh3WyBRkVRzcl2nWBd",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/2PQVnh3WyBRkVRzcl2nWBd"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273cc32e086988faa3addab8e54"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02cc32e086988faa3addab8e54"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851cc32e086988faa3addab8e54"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "1vSN1fsvrzpbttOYGsliDr",
+                    "name": "Tori Kelly",
+                    "href": "https://api.spotify.com/v1/artists/1vSN1fsvrzpbttOYGsliDr",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/1vSN1fsvrzpbttOYGsliDr"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "17oFMOCRu6P4WLqSSNyKPC",
+            "name": "Beyond Me",
+            "href": "https://api.spotify.com/v1/tracks/17oFMOCRu6P4WLqSSNyKPC",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/17oFMOCRu6P4WLqSSNyKPC"
+            },
+            "album": {
+                "id": "4wp4aWWpoYfNcspimVAnel",
+                "name": "But Here We Are",
+                "href": "https://api.spotify.com/v1/albums/4wp4aWWpoYfNcspimVAnel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/4wp4aWWpoYfNcspimVAnel"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b27384c85afa887f664fef3c5e8a"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e0284c85afa887f664fef3c5e8a"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000485184c85afa887f664fef3c5e8a"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "7jy3rLJdDQY21OgRLCZ9sD",
+                    "name": "Foo Fighters",
+                    "href": "https://api.spotify.com/v1/artists/7jy3rLJdDQY21OgRLCZ9sD",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/7jy3rLJdDQY21OgRLCZ9sD"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "35wau9leYsDWBTW4A0ISyL",
+            "name": "Black Anime",
+            "href": "https://api.spotify.com/v1/tracks/35wau9leYsDWBTW4A0ISyL",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/35wau9leYsDWBTW4A0ISyL"
+            },
+            "album": {
+                "id": "2Og05vfN0U9RcT4mLeOW9S",
+                "name": "Masego",
+                "href": "https://api.spotify.com/v1/albums/2Og05vfN0U9RcT4mLeOW9S",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/2Og05vfN0U9RcT4mLeOW9S"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273799cf48c9e6300054dac9467"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02799cf48c9e6300054dac9467"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851799cf48c9e6300054dac9467"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "3ycxRkcZ67ALN3GQJ57Vig",
+                    "name": "Masego",
+                    "href": "https://api.spotify.com/v1/artists/3ycxRkcZ67ALN3GQJ57Vig",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/3ycxRkcZ67ALN3GQJ57Vig"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "1ZwejHvd2KmKCWHn9HpAEw",
+            "name": "South of the River",
+            "href": "https://api.spotify.com/v1/tracks/1ZwejHvd2KmKCWHn9HpAEw",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/1ZwejHvd2KmKCWHn9HpAEw"
+            },
+            "album": {
+                "id": "0hDnsNkxpMDZrpBlGjldtW",
+                "name": "Geography",
+                "href": "https://api.spotify.com/v1/albums/0hDnsNkxpMDZrpBlGjldtW",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/0hDnsNkxpMDZrpBlGjldtW"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273abe203531eac29d17260966f"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02abe203531eac29d17260966f"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851abe203531eac29d17260966f"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "1uiEZYehlNivdK3iQyAbye",
+                    "name": "Tom Misch",
+                    "href": "https://api.spotify.com/v1/artists/1uiEZYehlNivdK3iQyAbye",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/1uiEZYehlNivdK3iQyAbye"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "6jGAh1bFnXt1Muj9zeHveZ",
+            "name": "After Last Night (with Thundercat & Bootsy Collins)",
+            "href": "https://api.spotify.com/v1/tracks/6jGAh1bFnXt1Muj9zeHveZ",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/6jGAh1bFnXt1Muj9zeHveZ"
+            },
+            "album": {
+                "id": "4VZ7jhV0wHpoNPCB7Vmiml",
+                "name": "An Evening With Silk Sonic",
+                "href": "https://api.spotify.com/v1/albums/4VZ7jhV0wHpoNPCB7Vmiml",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/4VZ7jhV0wHpoNPCB7Vmiml"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273d0bbd3ea2ec554f17a6603cc"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02d0bbd3ea2ec554f17a6603cc"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851d0bbd3ea2ec554f17a6603cc"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "0du5cEVh5yTK9QJze8zA0C",
+                    "name": "Bruno Mars",
+                    "href": "https://api.spotify.com/v1/artists/0du5cEVh5yTK9QJze8zA0C",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "3jK9MiCrA42lLAdMGUZpwa",
+                    "name": "Anderson .Paak",
+                    "href": "https://api.spotify.com/v1/artists/3jK9MiCrA42lLAdMGUZpwa",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/3jK9MiCrA42lLAdMGUZpwa"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "6PvvGcCY2XtUcSRld1Wilr",
+                    "name": "Silk Sonic",
+                    "href": "https://api.spotify.com/v1/artists/6PvvGcCY2XtUcSRld1Wilr",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/6PvvGcCY2XtUcSRld1Wilr"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "4frXpPxQQZwbCu3eTGnZEw",
+                    "name": "Thundercat",
+                    "href": "https://api.spotify.com/v1/artists/4frXpPxQQZwbCu3eTGnZEw",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/4frXpPxQQZwbCu3eTGnZEw"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "5K0rbdBrs2tNXe5LeWMATT",
+                    "name": "Bootsy Collins",
+                    "href": "https://api.spotify.com/v1/artists/5K0rbdBrs2tNXe5LeWMATT",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/5K0rbdBrs2tNXe5LeWMATT"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "4ziqjT3E0fbwEnfkAJ7sbf",
+            "name": "Glad I'm Not Alone",
+            "href": "https://api.spotify.com/v1/tracks/4ziqjT3E0fbwEnfkAJ7sbf",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/4ziqjT3E0fbwEnfkAJ7sbf"
+            },
+            "album": {
+                "id": "1uShIHkLCBBhLmH0KIXU2R",
+                "name": "Glad I'm Not Alone",
+                "href": "https://api.spotify.com/v1/albums/1uShIHkLCBBhLmH0KIXU2R",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/1uShIHkLCBBhLmH0KIXU2R"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b2738136d0522dcb1ab2e79c4a40"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e028136d0522dcb1ab2e79c4a40"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d000048518136d0522dcb1ab2e79c4a40"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "5sNbaOCPAZXHDCWobWHYWv",
+                    "name": "Victor Franco",
+                    "href": "https://api.spotify.com/v1/artists/5sNbaOCPAZXHDCWobWHYWv",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/5sNbaOCPAZXHDCWobWHYWv"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "5rwUYLyUq8gBsVaOUcUxpE",
+                    "name": "Lawrence",
+                    "href": "https://api.spotify.com/v1/artists/5rwUYLyUq8gBsVaOUcUxpE",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/5rwUYLyUq8gBsVaOUcUxpE"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "3FLqBnImYy6sSdtjkjGmQ8",
+            "name": "Don't Wanna Know",
+            "href": "https://api.spotify.com/v1/tracks/3FLqBnImYy6sSdtjkjGmQ8",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/3FLqBnImYy6sSdtjkjGmQ8"
+            },
+            "album": {
+                "id": "6aMiOQz7b0cCgCPodzJxo5",
+                "name": "Amen",
+                "href": "https://api.spotify.com/v1/albums/6aMiOQz7b0cCgCPodzJxo5",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/6aMiOQz7b0cCgCPodzJxo5"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273bfa71d2025ddbf451efb4259"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02bfa71d2025ddbf451efb4259"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851bfa71d2025ddbf451efb4259"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "6N1l2HIYtw3RhoJ2wzLYaB",
+                    "name": "Natalie Layne",
+                    "href": "https://api.spotify.com/v1/artists/6N1l2HIYtw3RhoJ2wzLYaB",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/6N1l2HIYtw3RhoJ2wzLYaB"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "3MmyrLEMNBwGicrY8x7jTs",
+            "name": "Look At Me",
+            "href": "https://api.spotify.com/v1/tracks/3MmyrLEMNBwGicrY8x7jTs",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/3MmyrLEMNBwGicrY8x7jTs"
+            },
+            "album": {
+                "id": "4W0Gyfy905bzv92GLkyoat",
+                "name": "Look At Me",
+                "href": "https://api.spotify.com/v1/albums/4W0Gyfy905bzv92GLkyoat",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/4W0Gyfy905bzv92GLkyoat"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273fd3d38e1498196bc4b145e1f"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02fd3d38e1498196bc4b145e1f"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851fd3d38e1498196bc4b145e1f"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "6xt9sJmmyYwWkJv8A6ssiU",
+                    "name": "Cory Wong",
+                    "href": "https://api.spotify.com/v1/artists/6xt9sJmmyYwWkJv8A6ssiU",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/6xt9sJmmyYwWkJv8A6ssiU"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "536osqBGKzeozje8BfcGsa",
+                    "name": "Allen Stone",
+                    "href": "https://api.spotify.com/v1/artists/536osqBGKzeozje8BfcGsa",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/536osqBGKzeozje8BfcGsa"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "0uzpt7May2M7dJ6NhnmixT",
+            "name": "Last Man in the World - Mateus Asato Version",
+            "href": "https://api.spotify.com/v1/tracks/0uzpt7May2M7dJ6NhnmixT",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/0uzpt7May2M7dJ6NhnmixT"
+            },
+            "album": {
+                "id": "28gzrR2NmkHzPSc3fKRV3O",
+                "name": "Last Man In The World (Mateus Asato Version)",
+                "href": "https://api.spotify.com/v1/albums/28gzrR2NmkHzPSc3fKRV3O",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/28gzrR2NmkHzPSc3fKRV3O"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273c6271deb78277bcde960eaf1"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02c6271deb78277bcde960eaf1"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851c6271deb78277bcde960eaf1"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "6d4jrmreCmsenscuieJERc",
+                    "name": "The Band CAMINO",
+                    "href": "https://api.spotify.com/v1/artists/6d4jrmreCmsenscuieJERc",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/6d4jrmreCmsenscuieJERc"
+                    },
+                    "genres": []
+                },
+                {
+                    "id": "4en3qu5SDsPtBcTkXasukc",
+                    "name": "Mateus Asato",
+                    "href": "https://api.spotify.com/v1/artists/4en3qu5SDsPtBcTkXasukc",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/4en3qu5SDsPtBcTkXasukc"
+                    },
+                    "genres": []
+                }
+            ]
+        },
+        {
+            "id": "290uimfGiOKZiM3dzt4lM2",
+            "name": "Bet",
+            "href": "https://api.spotify.com/v1/tracks/290uimfGiOKZiM3dzt4lM2",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/track/290uimfGiOKZiM3dzt4lM2"
+            },
+            "album": {
+                "id": "2YHSNzQGLkZQTUwCwlhhwh",
+                "name": "Bet",
+                "href": "https://api.spotify.com/v1/albums/2YHSNzQGLkZQTUwCwlhhwh",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/2YHSNzQGLkZQTUwCwlhhwh"
+                },
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d0000b273d4b451ce61e268e03481e3e7"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00001e02d4b451ce61e268e03481e3e7"
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab67616d00004851d4b451ce61e268e03481e3e7"
+                    }
+                ]
+            },
+            "artists": [
+                {
+                    "id": "7ENzCHnmJUr20nUjoZ0zZ1",
+                    "name": "Snarky Puppy",
+                    "href": "https://api.spotify.com/v1/artists/7ENzCHnmJUr20nUjoZ0zZ1",
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/artist/7ENzCHnmJUr20nUjoZ0zZ1"
+                    },
+                    "genres": []
+                }
+            ]
+        }
+    ],
+    "genres": [
+        "modern rock",
+        "rock",
+        "alternative metal",
+        "contemporary jazz",
+        "permanent wave",
+        "pop punk",
+        "punk",
+        "socal pop punk",
+        "funk rock",
+        "jazz"
+    ]
+}
