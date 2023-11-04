@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -41,8 +42,18 @@ const queryClient = new QueryClient({
 const Main = ({ children }: Props) => {
     return (
         <QueryClientProvider client={queryClient}>
-            <main className="flex min-h-screen flex-col items-center justify-center p-12">
-                {children}
+            <main className="flex min-h-screen flex-col items-center justify-center">
+                <div className="relative w-full h-32 flex justify-center items-center">
+                    <Image
+                        src={"/tapetally_logo.png"}
+                        alt=""
+                        width={220}
+                        height={100}
+                    />
+                </div>
+                <div className="px-4 py-8 md:px-12 w-full flex justify-center">
+                    {children}
+                </div>
             </main>
         </QueryClientProvider>
     );

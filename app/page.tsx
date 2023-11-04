@@ -72,7 +72,6 @@ export default function Home() {
                     {error.message}
                 </div>
             )}
-            <h1 className="p-4 mb-8 text-4xl">Vinylize Me</h1>
             {!accessToken ? (
                 <Link
                     className="h-12 min-w-max px-6 text-white bg-green-500 hover:bg-green-600 rounded flex gap-2 items-center"
@@ -89,7 +88,7 @@ export default function Home() {
                 </Link>
             ) : (
                 <>
-                    <div className="flex flex-col md:flex-row gap-4 justify-stretch w-full">
+                    <div className="flex flex-col md:flex-row gap-4 align-middle justify-stretch w-full">
                         <TopArtists artists={trends?.artists} />
                         <TopTracks tracks={trends?.tracks} />
                     </div>
