@@ -10,6 +10,7 @@ import useGetTrends from "@/hooks/useGetTrends";
 import useGetToken from "@/hooks/useGetToken";
 import { TimeRange } from "./types";
 import SpotifyLogo from "@/public/img/spotify.png";
+import Filters from "@/components/Filters";
 
 export default function Home() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -93,32 +94,10 @@ export default function Home() {
                 </Link>
             ) : (
                 <>
-                    <div className="grid grid-cols-3 w-full max-w-xs gap-1 mb-8">
-                        <button
-                            onClick={() => setTimeRange(TimeRange.Short)}
-                            className={`vintage-btn ${
-                                timeRange === TimeRange.Short && "active"
-                            } transition-all font-mono uppercase text-xs bg-vintage-yellow text-white`}
-                        >
-                            Last 30 Days
-                        </button>
-                        <button
-                            onClick={() => setTimeRange(TimeRange.Medium)}
-                            className={`vintage-btn ${
-                                timeRange === TimeRange.Medium && "active"
-                            } transition-all font-mono uppercase text-xs bg-vintage-orange text-white`}
-                        >
-                            Last 6 months
-                        </button>
-                        <button
-                            onClick={() => setTimeRange(TimeRange.Long)}
-                            className={`vintage-btn ${
-                                timeRange === TimeRange.Long && "active"
-                            } transition-all font-mono uppercase text-xs bg-vintage-brown text-white`}
-                        >
-                            Last Year
-                        </button>
-                    </div>
+                    <Filters
+                        timeRange={timeRange}
+                        handleOnClick={setTimeRange}
+                    />
                     <div className="flex flex-col md:flex-row gap-4 align-middle justify-stretch w-full">
                         <Artists artists={trends?.artists} />
                         <Tracks tracks={trends?.tracks} />

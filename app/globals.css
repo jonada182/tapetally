@@ -38,8 +38,8 @@ button.vintage-btn:hover {
 }
 
 button.vintage-btn.active {
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.5) inset;
-    -webkit-box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.7) inset;
+    -webkit-box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.7) inset;
     text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
     -webkit-text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
 }
