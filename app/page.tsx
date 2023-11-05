@@ -92,7 +92,7 @@ export default function Home() {
                 </Link>
             ) : (
                 <>
-                    <div className="grid grid-cols-3 h-full w-full max-w-xs gap-1 mb-8">
+                    <div className="grid grid-cols-3 w-full max-w-xs gap-1 mb-8">
                         <button
                             onClick={() => setTimeRange(TimeRange.Short)}
                             className={`vintage-btn ${
