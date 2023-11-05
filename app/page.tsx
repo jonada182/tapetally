@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { HttpStatusCode } from "axios";
 import Tracks from "@/components/Tracks";
 import Artists from "@/components/Artists";
 import useGetTrends from "@/hooks/useGetTrends";
-import Image from "next/image";
 import useGetToken from "@/hooks/useGetToken";
 import { TimeRange } from "./types";
-import { HttpStatusCode } from "axios";
+import SpotifyLogo from "@/public/img/spotify.png";
 
 export default function Home() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -81,7 +82,7 @@ export default function Home() {
                     href="/api/login"
                 >
                     <Image
-                        src="/spotify.png"
+                        src={SpotifyLogo}
                         alt=""
                         loading="lazy"
                         width={24}

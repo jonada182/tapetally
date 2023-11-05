@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import CassetteImage from "@/public/cassette.png";
+import CassetteImage from "@/public/img/cassette.png";
 
 type Props = {
     text: string;

@@ -1,6 +1,7 @@
+import React, { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { memo } from "react";
+import SpotifyLogo from "@/public/img/spotify.png";
 
 type Props = {
     url: string;
@@ -27,7 +28,7 @@ const ListItem = (props: Props) => {
                         className="object-cover w-full h-full absolute top-0 left-0 z-0 shadow-md shadow-black/30 group-hover:grayscale"
                     />
                     <Image
-                        src={"/spotify.png"}
+                        src={SpotifyLogo}
                         alt="Spotify"
                         width={36}
                         height={36}

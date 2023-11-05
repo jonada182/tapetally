@@ -20,7 +20,7 @@ body {
     color: #212121;
     /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
     background:
-        top left 100% / 100% no-repeat url("/top_bg.png"),
+        top left 100% / 100% no-repeat url("/img/top_bg.png"),
         linear-gradient(120deg, #fbeece 0%, #fda085 100%);
 }
 

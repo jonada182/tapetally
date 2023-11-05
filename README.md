@@ -68,6 +68,12 @@ Before you begin, ensure you have the following installed:
 
     Use this to run ESLint to find and fix problems in your JavaScript code.
 
+-   **Using Docker**
+
+    ```bash
+    docker compose up --build -d
+    ```
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).

@@ -1,6 +1,7 @@
+import React, { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { memo } from "react";
+import SpotifyLogo from "@/public/img/spotify.png";
 
 type Props = {
     title: string;
@@ -26,7 +27,7 @@ const Card = (props: Props) => {
                         className="w-full h-full absolute object-cover object-center z-0"
                     />
                     <Image
-                        src={"/spotify.png"}
+                        src={SpotifyLogo}
                         alt="Spotify"
                         width={36}
                         height={36}
