@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TapeTally
+
+TapeTally is a Next.js application that integrates with the Spotify API to retrieve a user's top artists and tracks, presenting them in a unique, retro mixtape style.
 
 ## Getting Started
 
-First, run the development server:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before you begin, ensure you have the following installed:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   [Node.js](https://nodejs.org/)
+-   [npm](https://www.npmjs.com/) (Typically comes with Node.js)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installation
 
-## Learn More
+1. **Clone the Repository**
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    git clone https://github.com/jonada182/tapetally.git
+    cd tapetally
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install Dependencies**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3. **Environment Setup**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Create a `.env.local` file in the root directory and add the following environment variables:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```
+    SPOTIFY_CLIENT_ID=your_spotify_client_id
+    SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+    SPOTIFY_REDIRECT_URI=http://localhost:3000
+    MOCK_API=true
+    ```
+
+    Replace `your_spotify_client_id` and `your_spotify_client_secret` with your Spotify application credentials.
+
+### Running the Application
+
+-   **Development Mode**
+
+    ```bash
+    npm run dev
+    ```
+
+    This will start the development server on [http://localhost:3000](http://localhost:3000). Navigate to this URL in a web browser to view the application.
+
+-   **Production Build**
+
+    ```bash
+    npm run build
+    npm run start
+    ```
+
+    This will create a production build and then start the application in production mode.
+
+-   **Linting**
+
+    ```bash
+    npm run lint
+    ```
+
+    Use this to run ESLint to find and fix problems in your JavaScript code.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
