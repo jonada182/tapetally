@@ -11,7 +11,7 @@ export async function POST(request: Request) {
         return;
 
     try {
-        if (process.env.MOCK_API) {
+        if (process.env.MOCK_API === "true") {
             return NextResponse.json({ access_token: "some_token" });
         }
 

@@ -19,9 +19,53 @@
 body {
     color: #212121;
     /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
-    background-color: #fbeece;
     background:
-        top left 100% / 100% no-repeat url("/top_background.png"),
-        bottom right 100% / 100% no-repeat url("/bottom_background.png"),
-        #fbeece;
+        top left 100% / 100% no-repeat url("/top_bg.png"),
+        linear-gradient(120deg, #fbeece 0%, #fda085 100%);
+}
+
+/* Vintage Buttons */
+button.vintage-btn {
+    position: relative;
+    border: 0;
+    border-radius: 4px;
+    padding: 8px 10px 16px;
+    transition: all ease-in-out 0.5s;
+    -webkit-transition: all ease-in-out 0.5s;
+}
+button.vintage-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+button.vintage-btn.active {
+    background-color: theme("backgroundColor.slate.800");
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7) inset;
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7) inset;
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
+    -webkit-text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
+}
+
+button.vintage-btn:after {
+    content: " ";
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 3px;
+    width: 80%;
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 10%;
+    border-radius: 3px;
+    transition: all ease-in-out 0.5s;
+    -webkit-transition: all ease-in-out 0.5s;
+}
+button.vintage-btn.active:after {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
+    -webkit-box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
+}
+button.vintage-btn:hover:not(.active):after {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+button.vintage-btn:focus {
+    outline: 0;
 }

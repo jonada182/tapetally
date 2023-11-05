@@ -21,7 +21,7 @@ export async function GET(request: Request) {
         const scope = "user-top-read";
         const redirectURI = process.env.SPOTIFY_REDIRECT_URI;
 
-        if (process.env.MOCK_API) {
+        if (process.env.MOCK_API === "true") {
             return NextResponse.redirect(redirectURI + "?code=test");
         }
 

@@ -1,49 +1,48 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { memo } from "react";
-import { Permanent_Marker } from "next/font/google";
 
 type Props = {
     title: string;
-    description?: string;
     imageUrl?: string;
+    url: string;
 };
-
-const titleFont = Permanent_Marker({ subsets: ["latin"], weight: "400" });
 
 const Card = (props: Props) => {
     return (
-        <div className="bg-black flex flex-col w-full items-stretch justify-end relative aspect-video shadow overflow-hidden rounded-xl">
+        <Link
+            href={props.url}
+            target="_blank"
+            className="bg-black group flex flex-col w-full max-w-sm h-full aspect-[4/5] items-stretch justify-end relative shadow-md shadow-amber-900/50 border-x-[12px] border-t-[12px] border-white"
+        >
             {props.imageUrl && (
-                <Image
-                    src={props.imageUrl}
-                    alt={props.title}
-                    fill={true}
-                    loading="lazy"
-                    className="object-cover object-center z-0"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+                <div className="relative flex flex-col items-center justify-center w-full h-4/5 aspect-square">
+                    <Image
+                        src={props.imageUrl}
+                        alt={props.title}
+                        width={512}
+                        height={512}
+                        loading="lazy"
+                        className="w-full h-full absolute object-cover object-center z-0"
+                    />
+                    <Image
+                        src={"/spotify.png"}
+                        alt="Spotify"
+                        width={36}
+                        height={36}
+                        className="z-20 opacity-0 group-hover:opacity-100 transition-all"
+                    />
+                    <div className="absolute transition-all top-0 left-0 w-full h-full bg-black group-hover:opacity-50 opacity-0"></div>
+                </div>
             )}
-            <div className="flex flex-col items-center justify-start relative h-40 p-4 z-20">
-                <h3
-                    className={`flex flex-col items-center justify-center max-w-sm h-12 lg:h-16 overflow-hidden text-base md:text-lg lg:text-2xl z-20 text-center text-black ${titleFont.className}`}
-                >
+            <div className="bg-gradient-radial from-transparent from-70% to-black/75 w-full h-4/5 z-10 absolute top-0 left-0 opacity-25"></div>
+            <div className="bg-amber-800 w-full h-full z-10 absolute bottom-0 left-0 opacity-20"></div>
+            <div className="flex flex-col gap-1 items-center justify-center relative h-1/5 z-20 bg-white">
+                <h3 className="max-w-sm text-lg md:text-xl md:leading-5 lg:text-2xl lg:leading-6 leading-4 z-20 text-black text-center">
                     {props.title}
                 </h3>
-                {props.description && (
-                    <h4 className="h-6 mt-4 px-4 flex flex-col justify-center overflow-hidden text-sm z-20 text-center bg-yellow-950 text-amber-100 uppercase rounded">
-                        {props.description}
-                    </h4>
-                )}
-                <Image
-                    src="/cassette.png"
-                    alt=""
-                    fill={true}
-                    sizes="100vw"
-                    className="object-cover object-top absolute bottom-0 px-4"
-                />
             </div>
-            <div className="bg-gradient-to-t from-black to-transparent w-full h-1/2 z-10 absolute bottom-0 left-0 opacity-75"></div>
-        </div>
+        </Link>
     );
 };
 

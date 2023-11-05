@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { stringify } from "querystring";
 import {
     ArtistsAPIResponse,
+    TimeRange,
     TracksAPIResponse,
     Trends,
     artistMapper,
@@ -10,11 +11,11 @@ import {
 } from "@/app/types";
 import data from "./data.json";
 
-enum TimeRanges {
-    Short = "short_term",
-    Medium = "medium_term",
-    Long = "long_term",
-}
+type RequestParams = {
+    params: {
+        timeRange: TimeRange;
+    };
+};
 
 const handleErrorResponse = (error: AxiosError) => {
     return NextResponse.json(
@@ -26,19 +27,18 @@ const handleErrorResponse = (error: AxiosError) => {
     );
 };
 
-export async function GET(request: Request) {
+export async function GET(request: Request, { params }: RequestParams) {
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
 
-        if (process.env.MOCK_API) {
+        if (process.env.MOCK_API === "true") {
             return NextResponse.json(data);
         }
 
         const trends: Trends = {
             artists: [],
             tracks: [],
-            genres: [],
         };
 
         const spotifyTrendsURL = "https://api.spotify.com/v1/me/top";
@@ -46,8 +46,8 @@ export async function GET(request: Request) {
             Authorization: `Bearer ${accessToken}`,
         };
         const queryParams = stringify({
-            limit: 10,
-            time_range: TimeRanges.Medium,
+            limit: 5,
+            time_range: params.timeRange || TimeRange.Medium,
         });
 
         try {
@@ -76,22 +76,6 @@ export async function GET(request: Request) {
                 });
 
             trends.tracks = tracksResponse.map(trackMapper);
-
-            const genres = new Map<string, number>();
-
-            trends.artists?.forEach((artist) => {
-                if (artist.genres && artist.genres.length > 0) {
-                    artist.genres.forEach((genre) => {
-                        const currentGenre = genres.get(genre);
-                        genres.set(genre, currentGenre ? currentGenre + 1 : 1);
-                    });
-                }
-            });
-
-            trends.genres = Array.from(genres.entries())
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10)
-                .map(([key]) => key);
         } catch (error: any) {
             return handleErrorResponse(error);
         }

@@ -12,6 +12,12 @@ export type UserAccessToken = {
     refresh_token: string;
 };
 
+export enum TimeRange {
+    Short = "short_term",
+    Medium = "medium_term",
+    Long = "long_term",
+}
+
 export type ArtistsAPIResponse = {
     items: Artist[];
 };
@@ -23,7 +29,6 @@ export type TracksAPIResponse = {
 export type Trends = {
     artists: Artist[];
     tracks: Track[];
-    genres: string[];
 };
 
 export type Image = {
