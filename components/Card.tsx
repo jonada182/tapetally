@@ -17,23 +17,23 @@ const Card = (props: Props) => {
             className="bg-black group flex flex-col w-full max-w-sm h-full aspect-[4/5] items-stretch justify-end relative shadow-md shadow-amber-900/50 border-x-[12px] border-t-[12px] border-white"
         >
             {props.imageUrl && (
-                <div className="relative flex flex-col items-center justify-center w-full h-4/5 aspect-square">
+                <div className="relative flex flex-col items-center justify-end w-full h-4/5 aspect-square overflow-hidden">
                     <Image
                         src={props.imageUrl}
                         alt={props.title}
                         width={512}
                         height={512}
                         loading="lazy"
-                        className="w-full h-full absolute object-cover object-center z-0"
+                        className="w-full h-full transition-all duration-300 group-hover:scale-110 absolute object-cover object-center z-0"
                     />
                     <Image
                         src={SpotifyLogo}
                         alt="Spotify"
                         width={36}
                         height={36}
-                        className="z-20 opacity-0 group-hover:opacity-100 transition-all"
+                        className="z-20 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-1/2 duration-300"
                     />
-                    <div className="absolute transition-all top-0 left-0 w-full h-full bg-black group-hover:opacity-50 opacity-0"></div>
+                    <div className="absolute transition-all duration-300 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent group-hover:opacity-75 opacity-0"></div>
                 </div>
             )}
             <div className="bg-gradient-radial from-transparent from-70% to-black/75 w-full h-4/5 z-10 absolute top-0 left-0 opacity-25"></div>

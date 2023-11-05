@@ -80,6 +80,7 @@ export default function Home() {
                 <Link
                     className="h-12 font-sans min-w-max px-6 text-white bg-green-500 hover:bg-green-600 rounded flex gap-2 items-center"
                     href="/api/login"
+                    prefetch={false}
                 >
                     <Image
                         src={SpotifyLogo}
@@ -97,7 +98,7 @@ export default function Home() {
                             onClick={() => setTimeRange(TimeRange.Short)}
                             className={`vintage-btn ${
                                 timeRange === TimeRange.Short && "active"
-                            } transition-all font-mono uppercase text-xs bg-amber-400 text-white`}
+                            } transition-all font-mono uppercase text-xs bg-vintage-yellow text-white`}
                         >
                             Last 30 Days
                         </button>
@@ -105,7 +106,7 @@ export default function Home() {
                             onClick={() => setTimeRange(TimeRange.Medium)}
                             className={`vintage-btn ${
                                 timeRange === TimeRange.Medium && "active"
-                            } transition-all font-mono uppercase text-xs bg-amber-600 text-white`}
+                            } transition-all font-mono uppercase text-xs bg-vintage-orange text-white`}
                         >
                             Last 6 months
                         </button>
@@ -113,7 +114,7 @@ export default function Home() {
                             onClick={() => setTimeRange(TimeRange.Long)}
                             className={`vintage-btn ${
                                 timeRange === TimeRange.Long && "active"
-                            } transition-all font-mono uppercase text-xs bg-amber-900 text-white`}
+                            } transition-all font-mono uppercase text-xs bg-vintage-brown text-white`}
                         >
                             Last Year
                         </button>

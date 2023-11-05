@@ -19,7 +19,7 @@ const ListItem = (props: Props) => {
         >
             <div className="text-black w-4">{props.index}</div>
             {props.imageUrl && (
-                <div className="relative flex flex-col items-center justify-center w-3/12 aspect-square">
+                <div className="relative flex flex-col items-center justify-end w-3/12 aspect-square">
                     <Image
                         src={props.imageUrl}
                         alt=""
@@ -30,11 +30,11 @@ const ListItem = (props: Props) => {
                     <Image
                         src={SpotifyLogo}
                         alt="Spotify"
-                        width={36}
-                        height={36}
-                        className="z-20 opacity-0 group-hover:opacity-100 transition-all"
+                        width={24}
+                        height={24}
+                        className="z-20 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-1/2 duration-300"
                     />
-                    <div className="absolute transition-all top-0 left-0 w-full h-full bg-black group-hover:opacity-50 opacity-0"></div>
+                    <div className="absolute transition-all duration-300 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent group-hover:opacity-75 opacity-0"></div>
                 </div>
             )}
             <h3 className="transition-all flex-grow text-lg leading-5 group-hover:text-amber-800 w-8/12">
