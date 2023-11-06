@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
 type Props = {
-    accessToken: string | null;
+    accessToken: string | null | undefined;
     timeRange: TimeRange;
 };
 

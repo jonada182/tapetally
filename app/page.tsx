@@ -14,10 +14,17 @@ import Filters from "@/components/Filters";
 
 export default function Home() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
+    const [refreshToken, setRefreshToken] = useState<string | null>(null);
     const [authCode, setAuthCode] = useState<string | null>(null);
     const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Medium);
     const searchParams = useSearchParams();
     const router = useRouter();
+    const {
+        data: tokenData,
+        error: tokenError,
+        isLoading: tokenIsLoading,
+        refresh: refreshAccessToken,
+    } = useGetToken({ code: authCode, refreshToken: refreshToken });
     const {
         data: trends,
         error: trendsError,
@@ -27,17 +34,14 @@ export default function Home() {
         accessToken: accessToken,
         timeRange: timeRange,
     });
-    const {
-        data: tokenData,
-        error: tokenError,
-        isLoading: tokenIsLoading,
-    } = useGetToken({ code: authCode });
     const isLoading = trendsIsLoading || tokenIsLoading;
     const error = trendsError || tokenError;
 
     useEffect(() => {
         const storedAccessToken = sessionStorage.getItem("access_token");
+        const storedRefreshToken = sessionStorage.getItem("refresh_token");
         setAccessToken(storedAccessToken);
+        setRefreshToken(storedRefreshToken);
     }, []);
 
     useEffect(() => {
@@ -54,14 +58,15 @@ export default function Home() {
     useEffect(() => {
         if (tokenData && tokenData.access_token) {
             setAccessToken(tokenData.access_token);
+            setRefreshToken(tokenData.refresh_token);
             sessionStorage.setItem("access_token", tokenData.access_token);
+            sessionStorage.setItem("refresh_token", tokenData.refresh_token);
         }
     }, [tokenData]);
 
     useEffect(() => {
         if (trendsError && trendsError?.response?.status == 401) {
-            setAccessToken(null);
-            sessionStorage.removeItem("access_token");
+            refreshAccessToken();
         }
     }, [trendsError]);
 

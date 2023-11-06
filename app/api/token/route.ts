@@ -1,7 +1,50 @@
-import { UserAccessToken } from "@/app/types";
 import axios from "axios";
 import { NextResponse } from "next/server";
+import { UserAccessToken } from "@/app/types";
 
+const apiUrl = "https://accounts.spotify.com/api/token";
+
+const getHeaders = () => ({
+    Authorization: `Basic ${Buffer.from(
+        `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
+    ).toString("base64")}`,
+    "Content-Type": "application/x-www-form-urlencoded",
+});
+
+/**
+ * Retrieve new access_token using refresh_token
+ * @param request
+ * @returns UserAccessToken | error
+ */
+export async function GET(request: Request) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const refreshToken = searchParams.get("refresh_token");
+        if (!refreshToken)
+            return NextResponse.json({ error: "No access token provided" });
+
+        const formData = new URLSearchParams();
+        formData.append("grant_type", "refresh_token");
+        formData.append("refresh_token", refreshToken);
+        const data = await axios
+            .post<UserAccessToken>(apiUrl, formData, {
+                headers: getHeaders(),
+            })
+            .then((response) => response.data);
+
+        if (data.access_token) {
+            return NextResponse.json(data);
+        }
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message });
+    }
+}
+
+/**
+ * Retrieve access_token using authorization code
+ * @param request
+ * @returns UserAccessToken | error
+ */
 export async function POST(request: Request) {
     if (
         !process.env.SPOTIFY_CLIENT_ID ||
@@ -25,22 +68,13 @@ export async function POST(request: Request) {
         formData.append("redirect_uri", process.env.SPOTIFY_REDIRECT_URI);
         formData.append("grant_type", "authorization_code");
         const data = await axios
-            .post<UserAccessToken>(
-                "https://accounts.spotify.com/api/token",
-                formData,
-                {
-                    headers: {
-                        Authorization: `Basic ${Buffer.from(
-                            `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
-                        ).toString("base64")}`,
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                },
-            )
+            .post<UserAccessToken>(apiUrl, formData, {
+                headers: getHeaders(),
+            })
             .then((response) => response.data);
 
         if (data.access_token) {
-            return NextResponse.json({ access_token: data.access_token });
+            return NextResponse.json(data);
         }
     } catch (error: any) {
         return NextResponse.json({ error: error.message });
