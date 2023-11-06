@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 import { UserAccessToken } from "@/app/types";
+import { handleErrorResponse } from "@/app/api/utils";
 
 const apiUrl = "https://accounts.spotify.com/api/token";
 
@@ -17,15 +18,25 @@ const getHeaders = () => ({
  * @returns UserAccessToken | error
  */
 export async function GET(request: Request) {
+    if (
+        !process.env.SPOTIFY_CLIENT_ID ||
+        !process.env.SPOTIFY_CLIENT_SECRET ||
+        !process.env.SPOTIFY_REDIRECT_URI
+    )
+        return;
     try {
         const { searchParams } = new URL(request.url);
         const refreshToken = searchParams.get("refresh_token");
-        if (!refreshToken)
-            return NextResponse.json({ error: "No access token provided" });
+        if (!refreshToken || refreshToken == "undefined")
+            return NextResponse.json(
+                { error: "Invalid token" },
+                { status: HttpStatusCode.BadRequest },
+            );
 
         const formData = new URLSearchParams();
         formData.append("grant_type", "refresh_token");
         formData.append("refresh_token", refreshToken);
+        formData.append("client_id", process.env.SPOTIFY_CLIENT_ID);
         const data = await axios
             .post<UserAccessToken>(apiUrl, formData, {
                 headers: getHeaders(),
@@ -36,7 +47,7 @@ export async function GET(request: Request) {
             return NextResponse.json(data);
         }
     } catch (error: any) {
-        return NextResponse.json({ error: error.message });
+        return handleErrorResponse(error);
     }
 }
 
@@ -77,6 +88,6 @@ export async function POST(request: Request) {
             return NextResponse.json(data);
         }
     } catch (error: any) {
-        return NextResponse.json({ error: error.message });
+        return handleErrorResponse(error);
     }
 }

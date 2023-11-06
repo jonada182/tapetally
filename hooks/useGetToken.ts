@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import axios, { AxiosError } from "axios";
 import { UserAccessToken } from "@/app/types";
+import { useMemo } from "react";
 
 type Props = {
     code?: string | null;
@@ -16,7 +17,8 @@ export default function useGetToken({ code, refreshToken }: Props) {
     } = useQuery<UserAccessToken, AxiosError>({
         queryKey: ["token"],
         queryFn: async () => {
-            if (!code) return Promise.reject(new Error("bad request"));
+            if (!code)
+                return Promise.reject(new Error("Invalid authentication code"));
 
             const response = await axios.post<UserAccessToken>("/api/token", {
                 code: code,
@@ -32,11 +34,14 @@ export default function useGetToken({ code, refreshToken }: Props) {
         error: refreshTokenError,
         isLoading: refreshTokenLoading,
     } = useQuery<UserAccessToken, AxiosError>({
+        queryKey: ["refresh_token", refreshToken],
         queryFn: async () => {
-            if (!refreshToken) return Promise.reject(new Error("bad request"));
-
+            if (!refreshToken || refreshToken == "undefined") {
+                queryClient.resetQueries(["token"]);
+                return Promise.reject(new Error("Invalid refresh token"));
+            }
             const response = await axios.get<UserAccessToken>(
-                `/api/token?access_token=${refreshToken}`,
+                `/api/token?refresh_token=${refreshToken}`,
             );
             return response.data;
         },

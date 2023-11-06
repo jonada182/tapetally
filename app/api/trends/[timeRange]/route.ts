@@ -10,21 +10,12 @@ import {
     trackMapper,
 } from "@/app/types";
 import data from "./data.json";
+import { handleErrorResponse } from "@/app/api/utils";
 
 type RequestParams = {
     params: {
         timeRange: TimeRange;
     };
-};
-
-const handleErrorResponse = (error: AxiosError) => {
-    return NextResponse.json(
-        { error: error.message },
-        {
-            status:
-                error.response?.status || HttpStatusCode.InternalServerError,
-        },
-    );
 };
 
 export async function GET(request: Request, { params }: RequestParams) {

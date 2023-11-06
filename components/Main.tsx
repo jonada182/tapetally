@@ -1,4 +1,5 @@
 "use client";
+import { AuthContextProvider } from "@/contexts/AuthContext";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -29,15 +30,17 @@ const queryClient = new QueryClient({
 const Main = ({ children }: Props) => {
     return (
         <QueryClientProvider client={queryClient}>
-            <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-12">
-                <div className="relative w-full px-4 mb-4 md:mb-8 flex flex-col justify-center items-center">
-                    <h1 className="text-4xl md:text-5xl">tapetally</h1>
-                    <p className="font-mono uppercase text-xs">
-                        Spotify trends on a retro spin
-                    </p>
-                </div>
-                <div className="w-full flex justify-center">{children}</div>
-            </main>
+            <AuthContextProvider>
+                <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-12">
+                    <div className="relative w-full px-4 mb-4 md:mb-8 flex flex-col justify-center items-center">
+                        <h1 className="text-4xl md:text-5xl">tapetally</h1>
+                        <p className="font-mono uppercase text-xs">
+                            Spotify trends on a retro spin
+                        </p>
+                    </div>
+                    <div className="w-full flex justify-center">{children}</div>
+                </main>
+            </AuthContextProvider>
         </QueryClientProvider>
     );
 };

@@ -1,30 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { HttpStatusCode } from "axios";
 import Tracks from "@/components/Tracks";
 import Artists from "@/components/Artists";
 import useGetTrends from "@/hooks/useGetTrends";
-import useGetToken from "@/hooks/useGetToken";
 import { TimeRange } from "./types";
 import SpotifyLogo from "@/public/img/spotify.png";
 import Filters from "@/components/Filters";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 export default function Home() {
-    const [accessToken, setAccessToken] = useState<string | null>(null);
-    const [refreshToken, setRefreshToken] = useState<string | null>(null);
-    const [authCode, setAuthCode] = useState<string | null>(null);
     const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Medium);
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const {
-        data: tokenData,
-        error: tokenError,
-        isLoading: tokenIsLoading,
-        refresh: refreshAccessToken,
-    } = useGetToken({ code: authCode, refreshToken: refreshToken });
+    const { accessToken, isAuthenticated, reuthenticate } = useAuthContext();
+
     const {
         data: trends,
         error: trendsError,
@@ -34,47 +24,19 @@ export default function Home() {
         accessToken: accessToken,
         timeRange: timeRange,
     });
-    const isLoading = trendsIsLoading || tokenIsLoading;
-    const error = trendsError || tokenError;
 
-    useEffect(() => {
-        const storedAccessToken = sessionStorage.getItem("access_token");
-        const storedRefreshToken = sessionStorage.getItem("refresh_token");
-        setAccessToken(storedAccessToken);
-        setRefreshToken(storedRefreshToken);
-    }, []);
-
-    useEffect(() => {
-        const code = searchParams.get("code");
-        const error = searchParams.get("error");
-        if (code && code !== authCode) {
-            setAuthCode(code);
-            router.replace("/");
-        } else if (error) {
-            console.log("Error occured:", error);
-        }
-    }, [router, searchParams]);
-
-    useEffect(() => {
-        if (tokenData && tokenData.access_token) {
-            setAccessToken(tokenData.access_token);
-            setRefreshToken(tokenData.refresh_token);
-            sessionStorage.setItem("access_token", tokenData.access_token);
-            sessionStorage.setItem("refresh_token", tokenData.refresh_token);
-        }
-    }, [tokenData]);
+    const isLoading = trendsIsLoading;
+    const error = trendsError;
 
     useEffect(() => {
         if (trendsError && trendsError?.response?.status == 401) {
-            refreshAccessToken();
+            reuthenticate();
         }
     }, [trendsError]);
 
     useEffect(() => {
-        if (accessToken) {
-            refetch();
-        }
-    }, [accessToken, timeRange]);
+        refetch();
+    }, [timeRange]);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -82,7 +44,7 @@ export default function Home() {
 
     return (
         <div className="flex h-full max-w-6xl w-full flex-col justify-stretch items-center">
-            {!accessToken ? (
+            {!isAuthenticated ? (
                 <Link
                     className="h-12 font-sans min-w-max px-6 text-white bg-green-500 hover:bg-green-600 rounded flex gap-2 items-center"
                     href="/api/login"
