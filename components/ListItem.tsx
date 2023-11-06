@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SpotifyLogo from "@/public/img/spotify.png";
+import VintageFilter from "./VintageFilter";
 
 type Props = {
     url: string;
@@ -34,6 +35,7 @@ const ListItem = (props: Props) => {
                         height={24}
                         className="z-20 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-1/2 duration-300"
                     />
+                    <VintageFilter />
                     <div className="absolute transition-all duration-300 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent group-hover:opacity-75 opacity-0"></div>
                 </div>
             )}

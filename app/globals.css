@@ -20,8 +20,14 @@ body {
     color: theme("colors.vintage-dark");
     /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
     background:
+        repeat url("/img/texture.png"),
         top left 100% / 100% no-repeat url("/img/top_bg.png"),
-        theme("colors.vintage-white");
+        /* linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%) */
+            linear-gradient(
+                0deg,
+                rgba(245, 212, 212, 1) 8.5%,
+                rgba(252, 251, 224, 1) 90.2%
+            );
 }
 
 /* Vintage Buttons */

@@ -1,6 +1,8 @@
 import querystring from "querystring";
 import { NextResponse } from "next/server";
 import { randomBytes } from "crypto";
+import { HttpStatusCode } from "axios";
+import { handleErrorResponse } from "../utils";
 
 const generateRandomString = (length: number) => {
     return randomBytes(Math.ceil(length / 2))
@@ -14,7 +16,12 @@ export async function GET(request: Request) {
         !process.env.SPOTIFY_CLIENT_SECRET ||
         !process.env.SPOTIFY_REDIRECT_URI
     )
-        return;
+        return NextResponse.json(
+            { error: "API environment setup is incomplete" },
+            {
+                status: HttpStatusCode.InternalServerError,
+            },
+        );
 
     try {
         const state = generateRandomString(16);
@@ -37,6 +44,6 @@ export async function GET(request: Request) {
             301,
         );
     } catch (error: any) {
-        return NextResponse.json({ error: error.message });
+        return handleErrorResponse(error);
     }
 }

@@ -1,7 +1,7 @@
-import useGetToken from "@/hooks/useGetToken";
-import { AxiosError } from "axios";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { AxiosError } from "axios";
+import useGetToken from "@/hooks/useGetToken";
 
 type Props = {
     children: React.ReactNode;
@@ -77,13 +77,16 @@ export const AuthContextProvider = ({ children }: Props) => {
         }
     }, [error]);
 
-    const contextValues: AuthContextType = {
-        accessToken: accessToken,
-        isAuthenticated: !!accessToken,
-        error: error,
-        isLoading: isLoading,
-        reuthenticate: () => refreshAccessToken(),
-    };
+    const contextValues: AuthContextType = useMemo(
+        () => ({
+            accessToken,
+            isAuthenticated: !!accessToken,
+            error: error,
+            isLoading: isLoading,
+            reuthenticate: refreshAccessToken,
+        }),
+        [accessToken, error, isLoading],
+    );
 
     return (
         <AuthContext.Provider value={contextValues}>

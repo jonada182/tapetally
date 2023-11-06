@@ -13,30 +13,18 @@ import { useAuthContext } from "@/contexts/AuthContext";
 
 export default function Home() {
     const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Medium);
-    const { accessToken, isAuthenticated, reuthenticate } = useAuthContext();
+    const { isAuthenticated } = useAuthContext();
 
     const {
         data: trends,
         error: trendsError,
         isLoading: trendsIsLoading,
-        refetch,
     } = useGetTrends({
-        accessToken: accessToken,
         timeRange: timeRange,
     });
 
     const isLoading = trendsIsLoading;
     const error = trendsError;
-
-    useEffect(() => {
-        if (trendsError && trendsError?.response?.status == 401) {
-            reuthenticate();
-        }
-    }, [trendsError]);
-
-    useEffect(() => {
-        refetch();
-    }, [timeRange]);
 
     if (isLoading) {
         return <div>Loading...</div>;

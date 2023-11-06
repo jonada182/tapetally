@@ -1,19 +1,17 @@
 import { TimeRange, Trends } from "@/app/types";
+import { useAuthContext } from "@/contexts/AuthContext";
 import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
 type Props = {
-    accessToken: string | null | undefined;
     timeRange: TimeRange;
 };
 
-export default function useGetTrends({ accessToken, timeRange }: Props) {
+export default function useGetTrends({ timeRange }: Props) {
+    const { accessToken, reuthenticate } = useAuthContext();
     return useQuery<Trends, AxiosError>({
         queryKey: ["trends", timeRange],
         queryFn: async () => {
-            if (!accessToken) {
-                return Promise.reject(new Error("Unauthorized"));
-            }
             const response = await axios.get<Trends>(
                 `/api/trends/${timeRange}`,
                 {
@@ -23,6 +21,11 @@ export default function useGetTrends({ accessToken, timeRange }: Props) {
                 },
             );
             return response.data;
+        },
+        onError: (err) => {
+            if (err && err?.response?.status == 401) {
+                reuthenticate();
+            }
         },
         enabled: !!accessToken,
     });
