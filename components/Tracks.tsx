@@ -1,11 +1,10 @@
 import React, { memo } from "react";
 import { Track } from "@/app/types";
-import Image from "next/image";
-import Card from "./Card";
-import Heading from "./Heading";
-import NoData from "./NoData";
-import ListItem from "./ListItem";
-import PaperContainer from "./PaperContainer";
+import Card from "./shared/Card";
+import CassetteHeading from "./CassetteHeading";
+import NoData from "./shared/NoData";
+import ListItem from "./shared/ListItem";
+import PaperContainer from "./shared/PaperContainer";
 
 type Props = {
     tracks: Track[] | undefined | null;
@@ -14,7 +13,7 @@ type Props = {
 const Tracks = (props: Props) => {
     return (
         <div className="flex flex-col gap-4 w-full lg:w-1/2 flex-grow">
-            <Heading text="My Tracks" />
+            <CassetteHeading text="My Tracks" />
             {!props.tracks && <NoData />}
             {props.tracks && (
                 <div className="flex flex-col justify-center items-center gap-4 -mt-20">

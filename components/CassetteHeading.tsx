@@ -6,7 +6,7 @@ type Props = {
     text: string;
 };
 
-const Heading = (props: Props) => {
+const CassetteHeading = (props: Props) => {
     return (
         <div className="relative flex h-40 justify-center align-middle">
             <h2 className="text-lg md:text-2xl text-center z-20 mt-5 md:mt-4">
@@ -23,4 +23,4 @@ const Heading = (props: Props) => {
     );
 };
 
-export default Heading;
+export default CassetteHeading;

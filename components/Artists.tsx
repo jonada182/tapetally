@@ -1,12 +1,10 @@
 import React, { memo } from "react";
 import { Artist } from "@/app/types";
-import Card from "./Card";
-import Heading from "./Heading";
-import NoData from "./NoData";
-import Image from "next/image";
-import Link from "next/link";
-import ListItem from "./ListItem";
-import PaperContainer from "./PaperContainer";
+import Card from "./shared/Card";
+import CassetteHeading from "./CassetteHeading";
+import NoData from "./shared/NoData";
+import ListItem from "./shared/ListItem";
+import PaperContainer from "./shared/PaperContainer";
 
 type Props = {
     artists: Artist[] | undefined | null;
@@ -15,7 +13,7 @@ type Props = {
 const Artists = (props: Props) => {
     return (
         <div className="flex flex-col gap-4 w-full lg:w-1/2 flex-grow">
-            <Heading text="My Artists" />
+            <CassetteHeading text="My Artists" />
             {!props.artists && <NoData />}
             {props.artists && (
                 <div className="flex flex-col justify-center items-center gap-4 -mt-20">
