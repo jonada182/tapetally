@@ -19,7 +19,7 @@ async function getBrowser() {
             ignoreHTTPSErrors: true,
         });
     } else {
-        return puppeteer.launch({ headless: true });
+        return puppeteer.launch({ headless: "new" });
     }
 }
 
