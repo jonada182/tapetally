@@ -16,7 +16,7 @@ const ListItem = (props: Props) => {
         <Link
             href={props.url}
             target="_blank"
-            className="z-20 flex gap-4 items-center group"
+            className="list-item-container z-20 flex gap-4 items-center group"
         >
             <div className="text-black w-4">{props.index}</div>
             {props.imageUrl && (

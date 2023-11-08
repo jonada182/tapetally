@@ -1,4 +1,4 @@
-import axios, { AxiosError, HttpStatusCode } from "axios";
+import axios from "axios";
 import { NextResponse } from "next/server";
 import { stringify } from "querystring";
 import {
@@ -40,6 +40,10 @@ export async function GET(request: Request, { params }: RequestParams) {
             limit: 5,
             time_range: params.timeRange || TimeRange.Medium,
         });
+
+        await Promise.resolve(() =>
+            setTimeout(() => console.log("done"), 5000),
+        );
 
         try {
             const artistsResponse = await axios

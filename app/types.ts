@@ -7,8 +7,11 @@ export type UserAccessToken = {
 };
 
 export enum TimeRange {
+    // eslint-disable-next-line no-unused-vars
     Short = "short_term",
+    // eslint-disable-next-line no-unused-vars
     Medium = "medium_term",
+    // eslint-disable-next-line no-unused-vars
     Long = "long_term",
 }
 

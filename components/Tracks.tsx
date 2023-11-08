@@ -42,6 +42,7 @@ const Tracks = (props: Props) => {
                             );
                         })}
                     </PaperContainer>
+                    <div id="puppeteer-tracks" className="hidden"></div>
                 </div>
             )}
         </div>

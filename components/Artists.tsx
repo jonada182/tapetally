@@ -41,6 +41,7 @@ const Artists = (props: Props) => {
                             );
                         })}
                     </PaperContainer>
+                    <div id="puppeteer-artists" className="hidden"></div>
                 </div>
             )}
         </div>

@@ -15,7 +15,7 @@ const Card = (props: Props) => {
         <Link
             href={props.url}
             target="_blank"
-            className="bg-black group flex flex-col w-full max-w-sm h-full aspect-[4/5] items-stretch justify-end relative z-10 shadow-md shadow-vintage-dark/30 border-x-[12px] border-t-[12px] border-white"
+            className="card-container bg-black group flex flex-col w-full max-w-sm h-full aspect-[4/5] items-stretch justify-end relative z-10 shadow-md shadow-vintage-dark/30 border-x-[12px] border-t-[12px] border-white"
         >
             {props.imageUrl && (
                 <div className="relative flex flex-col items-center justify-end w-full h-4/5 aspect-square overflow-hidden">

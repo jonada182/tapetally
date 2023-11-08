@@ -30,47 +30,45 @@ body {
             );
 }
 
-/* Vintage Buttons */
-button.vintage-btn {
-    position: relative;
-    border: 0;
-    border-radius: 4px;
-    padding: 8px 10px 16px;
-    transition: all ease-in-out 0.5s;
-    -webkit-transition: all ease-in-out 0.5s;
+/* Print view */
+.print-view {
+    gap: theme("gap.8");
 }
-button.vintage-btn:hover {
-    color: rgba(255, 255, 255, 0.7);
+.print-view #logo-container {
+    row-gap: theme("gap.4");
 }
-
-button.vintage-btn.active {
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.7) inset;
-    -webkit-box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.7) inset;
-    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
-    -webkit-text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+.print-view #logo-container h1 {
+    font-size: theme("fontSize.9xl");
 }
-
-button.vintage-btn:after {
-    content: " ";
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 3px;
-    width: 80%;
-    display: block;
-    position: absolute;
-    bottom: 5px;
-    left: 10%;
-    border-radius: 3px;
-    transition: all ease-in-out 0.5s;
-    -webkit-transition: all ease-in-out 0.5s;
+.print-view #logo-container p {
+    font-size: theme("fontSize.3xl");
 }
-button.vintage-btn.active:after {
-    background-color: #fff;
-    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
-    -webkit-box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.7);
+.print-view #filters-container {
+    gap: theme("gap.4");
+    margin-bottom: theme("gap.8");
 }
-button.vintage-btn:hover:not(.active):after {
-    background-color: rgba(255, 255, 255, 0.2);
+.print-view #filters-container .filters-label,
+.print-view #filters-container .filters-current {
+    font-size: theme("fontSize.3xl");
+    text-decoration: none;
 }
-button.vintage-btn:focus {
-    outline: 0;
+.print-view .cassette-heading {
+    height: theme("height.64");
+}
+.print-view .cassette-heading h2 {
+    font-size: theme("fontSize.4xl");
+    margin-top: theme("margin.9");
+}
+.print-view .card-container {
+    max-width: theme("maxWidth.lg");
+}
+.print-view .card-container h3 {
+    font-size: theme("fontSize.3xl");
+}
+.print-view .list-item-container h3 {
+    font-size: theme("fontSize.2xl");
+    line-height: theme("lineHeight.8");
+}
+.print-view #save-trends-container {
+    display: none;
 }

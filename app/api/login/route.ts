@@ -10,7 +10,7 @@ const generateRandomString = (length: number) => {
         .slice(0, length);
 };
 
-export async function GET(request: Request) {
+export async function GET() {
     if (
         !process.env.SPOTIFY_CLIENT_ID ||
         !process.env.SPOTIFY_CLIENT_SECRET ||

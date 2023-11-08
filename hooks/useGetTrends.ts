@@ -20,6 +20,8 @@ export default function useGetTrends({ timeRange }: Props) {
                     },
                 },
             );
+            // Delay response by 5 seconds
+            // await new Promise((resolve) => setTimeout(resolve, 5000));
             return response.data;
         },
         onError: (err) => {
