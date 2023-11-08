@@ -1,21 +1,29 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import puppeteer, { Browser } from "puppeteer";
 
 export async function GET(request: Request) {
+    if (!process.env.BROWSERLESS_TOKEN || !process.env.SPOTIFY_REDIRECT_URI)
+        return;
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
-
-        const browser = await puppeteer.launch({ headless: "new" });
-        const page = await browser.newPage();
-
-        await page.setViewport({ width: 1080, height: 1920 });
-        await page.goto("http://localhost:3000?print=true");
-        await page.evaluate((accessToken) => {
-            localStorage.setItem("access_token", accessToken);
-        }, accessToken);
         try {
-            // Wait for an element with a specific selector to appear (timeout after 10 seconds)
+            let browser: Browser;
+            if (process.env.NODE_ENV == "production") {
+                console.log("Setting up remote browser");
+                browser = await puppeteer.connect({
+                    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`,
+                });
+            } else {
+                browser = await puppeteer.launch({ headless: "new" });
+            }
+
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1080, height: 1920 });
+            await page.goto(`${process.env.SPOTIFY_REDIRECT_URI}?print=true`);
+            await page.evaluate((accessToken) => {
+                localStorage.setItem("access_token", accessToken);
+            }, accessToken);
             await page.waitForSelector("#puppeteer-artists", {
                 timeout: 10000,
             });

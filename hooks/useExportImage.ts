@@ -31,6 +31,8 @@ export const useExportImage = () => {
 
                         window.URL.revokeObjectURL(url);
                         document.body.removeChild(a);
+                    })
+                    .finally(() => {
                         setLoading(false);
                     });
             }
