@@ -44,13 +44,10 @@ export const AuthContextProvider = ({ children }: Props) => {
         const error = searchParams.get("error");
         if (code && code !== authCode) {
             setAuthCode(code);
+            router.replace("/");
         } else if (error) {
             console.log("Error occured:", error);
         }
-
-        return () => {
-            router.replace("/");
-        };
     }, [router, searchParams]);
 
     useEffect(() => {
