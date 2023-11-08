@@ -1,13 +1,20 @@
+import chromium from "@sparticuz/chromium";
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 
-const getBrowser = () =>
-    process.env.NODE_ENV === "production"
-        ? puppeteer.connect({
-              browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`,
-          })
-        : puppeteer.launch({ headless: "new" });
+async function getBrowser() {
+    chromium.setHeadlessMode = true;
+    return puppeteer.launch({
+        args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(
+            `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`,
+        ),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true,
+    });
+}
 
 export async function GET(request: Request) {
     if (!process.env.BROWSERLESS_TOKEN || !process.env.SPOTIFY_REDIRECT_URI)
@@ -20,8 +27,8 @@ export async function GET(request: Request) {
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
-        const browser = await getBrowser();
         try {
+            const browser = await getBrowser();
             const page = await browser.newPage();
             await page.setViewport({ width: 1080, height: 1920 });
             await page.goto(`${process.env.SPOTIFY_REDIRECT_URI}?print=true`);
@@ -40,11 +47,12 @@ export async function GET(request: Request) {
             });
             const response = new Response(image);
             response.headers.set("Content-Type", "image/jpeg");
+            if (browser) {
+                await browser.close();
+            }
             return response;
         } catch (err: any) {
             return NextResponse.json({ error: err.message }, { status: 500 });
-        } finally {
-            await browser.close();
         }
     }
 }

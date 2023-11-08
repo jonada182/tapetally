@@ -9,7 +9,7 @@ const nextConfig = {
         ],
     },
     experimental: {
-        serverComponentsExternalPackages: ["puppeteer"],
+        serverComponentsExternalPackages: ["puppeteer-core"],
     },
 };
 
