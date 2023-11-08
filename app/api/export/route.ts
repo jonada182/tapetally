@@ -1,4 +1,3 @@
-import chromium from "@sparticuz/chromium";
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
