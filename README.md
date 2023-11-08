@@ -36,7 +36,6 @@ Before you begin, ensure you have the following installed:
     SPOTIFY_CLIENT_ID=your_spotify_client_id
     SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
     SPOTIFY_REDIRECT_URI=http://localhost:3000
-    BROWSERLESS_TOKEN=browserlessio_token //
     MOCK_API=true
     ```
 

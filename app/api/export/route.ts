@@ -7,7 +7,7 @@ async function getBrowser() {
 }
 
 export async function GET(request: Request) {
-    if (!process.env.BROWSERLESS_TOKEN || !process.env.SPOTIFY_REDIRECT_URI)
+    if (!process.env.SPOTIFY_REDIRECT_URI)
         return NextResponse.json(
             { error: "API environment setup is incomplete" },
             {
