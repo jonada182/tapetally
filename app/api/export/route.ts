@@ -4,23 +4,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    if (process.env.NODE_ENV === "production") {
-        return puppeteer.launch({
-            args: [
-                ...chromium.args,
-                "--hide-scrollbars",
-                "--disable-web-security",
-            ],
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(
-                `app/api/export/chromium-v118.0.0-pack.tar`,
-            ),
-            headless: chromium.headless,
-            ignoreHTTPSErrors: true,
-        });
-    } else {
-        return puppeteer.launch({ headless: "new" });
-    }
+    return puppeteer.launch({ headless: "new" });
 }
 
 export async function GET(request: Request) {
