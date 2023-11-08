@@ -1,19 +1,26 @@
 import chromium from "@sparticuz/chromium";
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    chromium.setHeadlessMode = true;
-    return puppeteer.launch({
-        args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(
-            `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`,
-        ),
-        headless: chromium.headless,
-        ignoreHTTPSErrors: true,
-    });
+    if (process.env.NODE_ENV === "production") {
+        return puppeteer.launch({
+            args: [
+                ...chromium.args,
+                "--hide-scrollbars",
+                "--disable-web-security",
+            ],
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(
+                `app/api/export/chromium-v118.0.0-pack.tar`,
+            ),
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
+        });
+    } else {
+        return puppeteer.launch({ headless: true });
+    }
 }
 
 export async function GET(request: Request) {
