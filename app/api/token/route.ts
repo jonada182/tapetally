@@ -23,7 +23,12 @@ export async function GET(request: Request) {
         !process.env.SPOTIFY_CLIENT_SECRET ||
         !process.env.SPOTIFY_REDIRECT_URI
     )
-        return;
+        return NextResponse.json(
+            { error: "API environment setup is incomplete" },
+            {
+                status: HttpStatusCode.InternalServerError,
+            },
+        );
     try {
         const { searchParams } = new URL(request.url);
         const refreshToken = searchParams.get("refresh_token");

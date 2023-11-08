@@ -1,9 +1,15 @@
+import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 import puppeteer, { Browser } from "puppeteer";
 
 export async function GET(request: Request) {
     if (!process.env.BROWSERLESS_TOKEN || !process.env.SPOTIFY_REDIRECT_URI)
-        return;
+        return NextResponse.json(
+            { error: "API environment setup is incomplete" },
+            {
+                status: HttpStatusCode.InternalServerError,
+            },
+        );
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
