@@ -1,6 +1,13 @@
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
-import puppeteer, { Browser } from "puppeteer";
+import puppeteer from "puppeteer";
+
+const getBrowser = () =>
+    process.env.NODE_ENV === "production"
+        ? puppeteer.connect({
+              browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`,
+          })
+        : puppeteer.launch({ headless: "new" });
 
 export async function GET(request: Request) {
     if (!process.env.BROWSERLESS_TOKEN || !process.env.SPOTIFY_REDIRECT_URI)
@@ -13,17 +20,8 @@ export async function GET(request: Request) {
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
+        const browser = await getBrowser();
         try {
-            let browser: Browser;
-            if (process.env.NODE_ENV == "production") {
-                console.log("Setting up remote browser");
-                browser = await puppeteer.connect({
-                    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`,
-                });
-            } else {
-                browser = await puppeteer.launch({ headless: "new" });
-            }
-
             const page = await browser.newPage();
             await page.setViewport({ width: 1080, height: 1920 });
             await page.goto(`${process.env.SPOTIFY_REDIRECT_URI}?print=true`);
@@ -40,12 +38,13 @@ export async function GET(request: Request) {
                 type: "jpeg",
                 optimizeForSpeed: true,
             });
-            await browser.close();
             const response = new Response(image);
             response.headers.set("Content-Type", "image/jpeg");
             return response;
         } catch (err: any) {
             return NextResponse.json({ error: err.message }, { status: 500 });
+        } finally {
+            await browser.close();
         }
     }
 }
