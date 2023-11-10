@@ -1,9 +1,19 @@
 import { HttpStatusCode } from "axios";
+import chromium from "chrome-aws-lambda";
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    return puppeteer.launch({ headless: "new" });
+    if (process.env.NODE_ENV === "development") {
+        return chromium.puppeteer.launch({ headless: true });
+    }
+    console.log("Returning chromium browser")
+    return chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: true,
+        ignoreHTTPSErrors: true,
+    });
 }
 
 export async function GET(request: Request) {
@@ -18,28 +28,29 @@ export async function GET(request: Request) {
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
         try {
+            console.log("Setting up browser/page settings")
             const browser = await getBrowser();
             const page = await browser.newPage();
             await page.setViewport({ width: 1080, height: 1920 });
             await page.goto(`${process.env.SPOTIFY_REDIRECT_URI}?print=true`);
+            console.log("Setting up access token")
             await page.evaluate((accessToken) => {
                 localStorage.setItem("access_token", accessToken);
             }, accessToken);
             await page.waitForSelector("#puppeteer-artists", {
                 timeout: 10000,
             });
-            console.log("Element found on the page.");
 
+            console.log("Generating image...");
             const image = await page.screenshot({
                 quality: 80,
                 type: "jpeg",
-                optimizeForSpeed: true,
             });
-            const response = new Response(image);
-            response.headers.set("Content-Type", "image/jpeg");
             if (browser) {
                 await browser.close();
             }
+            const response = new Response(image as Buffer);
+            response.headers.set("Content-Type", "image/jpeg");
             return response;
         } catch (err: any) {
             return NextResponse.json({ error: err.message }, { status: 500 });
