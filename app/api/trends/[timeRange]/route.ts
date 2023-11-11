@@ -22,7 +22,6 @@ export async function GET(request: Request, { params }: RequestParams) {
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
-
         if (process.env.MOCK_API === "true") {
             return NextResponse.json(data);
         }

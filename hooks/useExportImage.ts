@@ -12,7 +12,7 @@ export const useExportImage = () => {
             if (accessToken) {
                 setLoading(true);
                 axios
-                    .get("/api/export", {
+                    .get(`/api/export?url=${encodeURIComponent(window.location.href + `&print=true`)}`, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },

@@ -28,11 +28,16 @@ export async function GET(request: Request) {
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
         try {
+            const { searchParams } = new URL(request.url)
+            const url = searchParams.get("url");
+            if (!url) {
+                return NextResponse.json({ error: "No URL was provided with the request"}, {status: HttpStatusCode.BadRequest});
+            }
             console.log("Setting up browser/page settings")
             const browser = await getBrowser();
             const page = await browser.newPage();
             await page.setViewport({ width: 1080, height: 1920 });
-            await page.goto(`${process.env.SPOTIFY_REDIRECT_URI}?print=true`);
+            await page.goto(url);
             console.log("Setting up access token")
             await page.evaluate((accessToken) => {
                 localStorage.setItem("access_token", accessToken);
@@ -43,7 +48,7 @@ export async function GET(request: Request) {
 
             console.log("Generating image...");
             const image = await page.screenshot({
-                quality: 80,
+                quality: 90,
                 type: "jpeg",
             });
             if (browser) {

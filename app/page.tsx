@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { HttpStatusCode } from "axios";
@@ -12,8 +12,12 @@ import Filters from "@/components/Filters";
 import { useAuthContext } from "@/contexts/AuthContext";
 import Loading from "@/components/shared/Loading";
 import { useExportImage } from "@/hooks/useExportImage";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Home() {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Medium);
     const {
         isAuthenticated,
@@ -36,6 +40,19 @@ export default function Home() {
     } = useExportImage();
 
     const error = trendsError || authError || exportError;
+
+    useEffect(() => {
+        const timeRangeParam = searchParams.get("time_range");
+        if (timeRangeParam) {
+            setTimeRange(timeRangeParam as TimeRange);
+        }
+    }, [searchParams]);
+
+    const handleTimeRangeChange = useCallback((timeRange: TimeRange) => {
+        const params = new URLSearchParams(searchParams)
+        params.set("time_range", timeRange)
+        router.push(`${pathname}?${params.toString()}`)
+    },[pathname, router, searchParams])
 
     if (authLoading) {
         return <Loading />;
@@ -66,7 +83,7 @@ export default function Home() {
                 <>
                     <Filters
                         timeRange={timeRange}
-                        handleOnClick={setTimeRange}
+                        handleOnClick={handleTimeRangeChange}
                     />
                     {trendsIsLoading ? (
                         <Loading message="Loading Spotify trends..." />

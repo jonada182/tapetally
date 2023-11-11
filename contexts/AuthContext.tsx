@@ -29,7 +29,7 @@ export const AuthContextProvider = ({ children }: Props) => {
         data: tokenData,
         error: error,
         isLoading: isLoading,
-        refresh: refreshAccessToken,
+        refresh,
     } = useGetToken({ code: authCode, refreshToken: refreshToken });
 
     useEffect(() => {
@@ -80,7 +80,7 @@ export const AuthContextProvider = ({ children }: Props) => {
             isAuthenticated: !!accessToken,
             error: error,
             isLoading: isLoading,
-            reuthenticate: refreshAccessToken,
+            reuthenticate: () => refresh(),
         }),
         [accessToken, error, isLoading],
     );

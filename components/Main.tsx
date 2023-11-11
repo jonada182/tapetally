@@ -11,7 +11,7 @@ type Props = {
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            retry: false,
+            retry: 3,
             retryOnMount: false,
             refetchOnWindowFocus: false,
             cacheTime: 30 * 60 * 1000,
