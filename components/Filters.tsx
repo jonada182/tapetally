@@ -55,9 +55,10 @@ const Filters = (props: Props) => {
                                             ? "font-bold underline"
                                             : "font-light no-underline"
                                     } transition-all cursor-pointer hover:text-vintage-yellow`}
-                                    onClick={() => {
+                                    onClick={(e) => {
                                         setDropdownIsOpen(false);
                                         props.handleOnClick(key as TimeRange);
+                                        e.preventDefault();
                                     }}
                                 >
                                     {value}

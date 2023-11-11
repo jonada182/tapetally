@@ -49,10 +49,10 @@ export default function Home() {
     }, [searchParams]);
 
     const handleTimeRangeChange = useCallback((timeRange: TimeRange) => {
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams()
         params.set("time_range", timeRange)
         router.push(`${pathname}?${params.toString()}`)
-    },[pathname, router, searchParams])
+    },[pathname, router])
 
     if (authLoading) {
         return <Loading />;

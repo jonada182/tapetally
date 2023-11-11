@@ -19,7 +19,7 @@ export const useExportImage = ({ timeRange }: Props) => {
                 params.set("time_range", timeRange)
                 params.set("print", "true")
                 axios
-                    .get(`/api/export?url=${encodeURIComponent(window.location.host + "?" + params.toString())}`, {
+                    .get(`/api/export?url=${encodeURIComponent(window.location.origin + "?" + params.toString())}`, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },

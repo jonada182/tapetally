@@ -1,19 +1,12 @@
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
-import { chromium } from "playwright";
+import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    return chromium.launch({ headless: true });
+    return puppeteer.launch({ headless: true });
 }
 
 export async function GET(request: NextRequest) {
-    if (!process.env.SPOTIFY_REDIRECT_URI)
-        return NextResponse.json(
-            { error: "API environment setup is incomplete" },
-            {
-                status: HttpStatusCode.InternalServerError,
-            },
-        );
     const authorization = request.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
@@ -27,13 +20,16 @@ export async function GET(request: NextRequest) {
             }
             console.log("Setting up browser/page settings");
             const browser = await getBrowser();
-            const context = await browser.newContext();
-            const page = await context.newPage();
-            await page.setViewportSize({ width: 1080, height: 1920 });
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1080, height: 1920 });
             const decodedURL = decodeURIComponent(url);
             console.log("Visiting URL:", decodedURL)
             await page.goto(decodedURL + "&token=" + accessToken);
-            await page.waitForLoadState("networkidle");
+            await page.waitForNetworkIdle();
+            await page.waitForSelector("#puppeteer-artists", {
+                timeout: 5000,
+            });
+
             console.log("Generating image...");
             const image = await page.screenshot({
                 quality: 80,

@@ -46,11 +46,20 @@ export async function GET(request: Request) {
             .post<UserAccessToken>(apiUrl, formData, {
                 headers: getHeaders(),
             })
-            .then((response) => response.data);
-
-        if (data.access_token) {
+            .then((response) => {
+                if (response.data) {
+                    return response.data
+                }
+                console.log(response)
+                throw new Error("invalid response")
+            })
+            .catch((error) => { throw error });
+        if (data && data.access_token) {
             return NextResponse.json(data);
         }
+        
+        console.log(data)
+        return NextResponse.json({ error: "invalid response"}, {status: HttpStatusCode.NotFound})
     } catch (error: any) {
         return handleErrorResponse(error);
     }

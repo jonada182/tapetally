@@ -39,25 +39,33 @@ export const AuthContextProvider = ({ children }: Props) => {
         setAccessToken(storedAccessToken);
         setRefreshToken(storedRefreshToken);
     }, []);
-
     useEffect(() => {
-        const token = searchParams.get("token");
+        let replaceParams = false;
+        const newSearchParams = new URLSearchParams(searchParams);
         const code = searchParams.get("code");
-        const error = searchParams.get("error");
         if (code && code !== authCode) {
             setAuthCode(code);
-        } else if (error) {
+            newSearchParams.delete("code");
+            newSearchParams.delete("state");
+            replaceParams = true;
+        }
+
+        const error = searchParams.get("error");
+        if (error) {
             console.log("Error occured:", error);
         }
+
+        const token = searchParams.get("token");
         if (token) {
-            setAccessToken(token)
+            setAccessToken(token);
+            newSearchParams.delete("token");
+            replaceParams = true;
         }
-        // Clean up query params
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.delete("code")
-        newSearchParams.delete("token")
-        router.push(pathname + "?" + newSearchParams.toString())
-    }, [router, searchParams]);
+
+        if (replaceParams) {
+            router.replace(pathname + "?" + newSearchParams.toString());
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         if (tokenData && tokenData.access_token) {
@@ -65,7 +73,10 @@ export const AuthContextProvider = ({ children }: Props) => {
             sessionStorage.setItem("access_token", tokenData.access_token);
             if (tokenData.refresh_token) {
                 setRefreshToken(tokenData.refresh_token);
-                sessionStorage.setItem("refresh_token", tokenData.refresh_token);
+                sessionStorage.setItem(
+                    "refresh_token",
+                    tokenData.refresh_token,
+                );
             }
         }
 
@@ -91,7 +102,7 @@ export const AuthContextProvider = ({ children }: Props) => {
             isLoading: isLoading,
             reuthenticate: () => refresh(),
         }),
-        [accessToken, error, isLoading],
+        [accessToken, error, isLoading, refresh],
     );
 
     return (

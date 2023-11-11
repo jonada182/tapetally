@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1
 
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/engine/reference/builder/
+
 ARG NODE_VERSION=21.1.0
 
 ################################################################################
@@ -55,9 +59,8 @@ COPY package.json .
 
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/.next ./.next
-
+COPY --chown=node:node --from=deps /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/.next ./.next
 
 # Expose the port that the application listens on.
 EXPOSE 3000
