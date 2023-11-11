@@ -9,7 +9,7 @@ const nextConfig = {
         ],
     },
     experimental: {
-        serverComponentsExternalPackages: ["puppeteer", "chrome-aws-lambda"],
+        serverComponentsExternalPackages: ["puppeteer"],
     },
 };
 

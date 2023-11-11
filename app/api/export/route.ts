@@ -1,19 +1,9 @@
 import { HttpStatusCode } from "axios";
-import chromium from "chrome-aws-lambda";
 import { NextRequest, NextResponse } from "next/server";
+import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    if (process.env.NODE_ENV === "development") {
-        return chromium.puppeteer.launch({ headless: true });
-    }
-    console.log("Returning chromium browser")
-    return chromium.puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath,
-        headless: true,
-        ignoreHTTPSErrors: true,
-    });
+    return puppeteer.launch({ headless: true });
 }
 
 export async function GET(request: NextRequest) {
