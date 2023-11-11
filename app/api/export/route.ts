@@ -1,9 +1,9 @@
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import { chromium } from "playwright";
 
 async function getBrowser() {
-    return puppeteer.launch({ headless: true });
+    return chromium.launch({ headless: true });
 }
 
 export async function GET(request: NextRequest) {
@@ -20,24 +20,23 @@ export async function GET(request: NextRequest) {
         try {
             const url = request.nextUrl.searchParams.get("url");
             if (!url) {
-                return NextResponse.json({ error: "No URL was provided with the request"}, {status: HttpStatusCode.BadRequest});
+                return NextResponse.json(
+                    { error: "No URL was provided with the request" },
+                    { status: HttpStatusCode.BadRequest },
+                );
             }
-            console.log("Setting up browser/page settings")
+            console.log("Setting up browser/page settings");
             const browser = await getBrowser();
-            const page = await browser.newPage();
-            await page.setViewport({ width: 1080, height: 1920 });
-            await page.goto(url);
-            console.log("Setting up access token")
-            await page.evaluate((accessToken) => {
-                localStorage.setItem("access_token", accessToken);
-            }, accessToken);
-            await page.waitForSelector("#puppeteer-artists", {
-                timeout: 5000,
-            });
-
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            await page.setViewportSize({ width: 1080, height: 1920 });
+            const decodedURL = decodeURIComponent(url);
+            console.log("Visiting URL:", decodedURL)
+            await page.goto(decodedURL + "&token=" + accessToken);
+            await page.waitForLoadState("networkidle");
             console.log("Generating image...");
             const image = await page.screenshot({
-                quality: 90,
+                quality: 80,
                 type: "jpeg",
             });
             if (browser) {

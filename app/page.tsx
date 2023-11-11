@@ -37,7 +37,7 @@ export default function Home() {
         exportImage,
         error: exportError,
         isLoading: exportIsLoading,
-    } = useExportImage();
+    } = useExportImage({ timeRange: timeRange});
 
     const error = trendsError || authError || exportError;
 

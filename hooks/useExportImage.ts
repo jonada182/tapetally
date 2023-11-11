@@ -2,8 +2,12 @@ import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useState } from "react";
+import { TimeRange } from "@/app/types";
 
-export const useExportImage = () => {
+type Props = {
+    timeRange: TimeRange
+}
+export const useExportImage = ({ timeRange }: Props) => {
     const { accessToken } = useAuthContext();
     const [loading, setLoading] = useState(false);
     const { mutate: exportImage, error } = useMutation<void, AxiosError>({
@@ -11,8 +15,11 @@ export const useExportImage = () => {
         mutationFn: async () => {
             if (accessToken) {
                 setLoading(true);
+                const params = new URLSearchParams();
+                params.set("time_range", timeRange)
+                params.set("print", "true")
                 axios
-                    .get(`/api/export?url=${encodeURIComponent(window.location.href + `&print=true`)}`, {
+                    .get(`/api/export?url=${encodeURIComponent(window.location.host + "?" + params.toString())}`, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },
