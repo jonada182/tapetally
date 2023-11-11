@@ -1,9 +1,18 @@
+import Chromium from "@sparticuz/chromium";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    return puppeteer.launch({ headless: "new", args: ["--no-sandbox"] });
+    if (process.env.NODE_ENV === "production") {
+        return puppeteer.launch({
+            args: Chromium.args,
+            defaultViewport: Chromium.defaultViewport,
+            executablePath: await Chromium.executablePath(),
+            headless: "new",
+          })
+    }
+    return puppeteer.launch({ headless: "new" });
 }
 
 export async function GET(request: NextRequest) {

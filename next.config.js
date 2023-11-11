@@ -8,7 +8,7 @@ const nextConfig = {
         ],
     },
     experimental: {
-        serverComponentsExternalPackages: ["puppeteer"],
+        serverComponentsExternalPackages: ["puppeteer", "@sparticuz/chromium"],
     },
 };
 
