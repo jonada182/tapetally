@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "axios";
 import chromium from "chrome-aws-lambda";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 async function getBrowser() {
     if (process.env.NODE_ENV === "development") {
@@ -16,7 +16,7 @@ async function getBrowser() {
     });
 }
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     if (!process.env.SPOTIFY_REDIRECT_URI)
         return NextResponse.json(
             { error: "API environment setup is incomplete" },
@@ -28,8 +28,7 @@ export async function GET(request: Request) {
     if (authorization && authorization.startsWith("Bearer")) {
         const accessToken = authorization.replace("Bearer ", "");
         try {
-            const { searchParams } = new URL(request.url)
-            const url = searchParams.get("url");
+            const url = request.nextUrl.searchParams.get("url");
             if (!url) {
                 return NextResponse.json({ error: "No URL was provided with the request"}, {status: HttpStatusCode.BadRequest});
             }
@@ -43,7 +42,7 @@ export async function GET(request: Request) {
                 localStorage.setItem("access_token", accessToken);
             }, accessToken);
             await page.waitForSelector("#puppeteer-artists", {
-                timeout: 10000,
+                timeout: 5000,
             });
 
             console.log("Generating image...");
