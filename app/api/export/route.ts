@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 async function getBrowser() {
-    return puppeteer.launch({ headless: true });
+    return puppeteer.launch({ headless: "new" });
 }
 
 export async function GET(request: NextRequest) {
