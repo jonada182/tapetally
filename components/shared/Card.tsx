@@ -24,7 +24,9 @@ const Card = (props: Props) => {
                         alt={props.title}
                         width={512}
                         height={512}
-                        loading="lazy"
+                        loading="eager"
+                        priority={true}
+                        unoptimized={true}
                         className="w-full h-full transition-all duration-300 group-hover:scale-110 absolute object-cover object-center z-0"
                     />
                     <Image

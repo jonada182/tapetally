@@ -26,6 +26,9 @@ const ListItem = (props: Props) => {
                         alt=""
                         width={100}
                         height={100}
+                        loading="eager"
+                        priority={true}
+                        unoptimized={true}
                         className="object-cover w-full h-full absolute top-0 left-0 z-0 shadow-md shadow-black/30 group-hover:grayscale"
                     />
                     <Image

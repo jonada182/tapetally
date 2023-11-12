@@ -6,7 +6,7 @@ import puppeteer from "puppeteer";
 async function getBrowser() {
     if (process.env.NODE_ENV === "production") {
         return puppeteer.launch({
-            args: Chromium.args,
+            args: [...Chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
             defaultViewport: Chromium.defaultViewport,
             executablePath: await Chromium.executablePath(),
             headless: "new",
