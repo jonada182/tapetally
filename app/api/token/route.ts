@@ -18,17 +18,14 @@ const getHeaders = () => ({
  * @returns UserAccessToken | error
  */
 export async function GET(request: Request) {
-    if (
-        !process.env.SPOTIFY_CLIENT_ID ||
-        !process.env.SPOTIFY_CLIENT_SECRET ||
-        !process.env.SPOTIFY_REDIRECT_URI
-    )
+    if (!process.env.SPOTIFY_CLIENT_ID)
         return NextResponse.json(
             { error: "API environment setup is incomplete" },
             {
                 status: HttpStatusCode.InternalServerError,
             },
         );
+
     try {
         const { searchParams } = new URL(request.url);
         const refreshToken = searchParams.get("refresh_token");
@@ -48,18 +45,23 @@ export async function GET(request: Request) {
             })
             .then((response) => {
                 if (response.data) {
-                    return response.data
+                    return response.data;
                 }
-                console.log(response)
-                throw new Error("invalid response")
+                console.log(response);
+                throw new Error("invalid response");
             })
-            .catch((error) => { throw error });
+            .catch((error) => {
+                throw error;
+            });
         if (data && data.access_token) {
             return NextResponse.json(data);
         }
-        
-        console.log(data)
-        return NextResponse.json({ error: "invalid response"}, {status: HttpStatusCode.NotFound})
+
+        console.log(data);
+        return NextResponse.json(
+            { error: "invalid response" },
+            { status: HttpStatusCode.NotFound },
+        );
     } catch (error: any) {
         return handleErrorResponse(error);
     }
@@ -76,7 +78,12 @@ export async function POST(request: Request) {
         !process.env.SPOTIFY_CLIENT_SECRET ||
         !process.env.SPOTIFY_REDIRECT_URI
     )
-        return;
+        return NextResponse.json(
+            { error: "API environment setup is incomplete" },
+            {
+                status: HttpStatusCode.InternalServerError,
+            },
+        );
 
     try {
         if (process.env.MOCK_API === "true") {
