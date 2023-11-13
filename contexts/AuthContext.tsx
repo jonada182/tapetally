@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AxiosError } from "axios";
 import useGetToken from "@/hooks/useGetToken";
+import { QueryObserverResult } from "react-query";
 
 type Props = {
     children: React.ReactNode;
@@ -12,7 +13,7 @@ type AuthContextType = {
     isAuthenticated: boolean;
     error: AxiosError | null;
     isLoading: boolean;
-    reuthenticate: () => void;
+    reuthenticate: () => Promise<QueryObserverResult>;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -100,7 +101,7 @@ export const AuthContextProvider = ({ children }: Props) => {
             isAuthenticated: !!accessToken,
             error: error,
             isLoading: isLoading,
-            reuthenticate: () => refresh(),
+            reuthenticate: refresh,
         }),
         [accessToken, error, isLoading, refresh],
     );

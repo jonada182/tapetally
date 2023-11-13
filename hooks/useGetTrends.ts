@@ -1,7 +1,7 @@
 import { TimeRange, Trends } from "@/app/types";
 import { useAuthContext } from "@/contexts/AuthContext";
 import axios, { AxiosError } from "axios";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 type Props = {
     timeRange: TimeRange;
@@ -9,6 +9,7 @@ type Props = {
 
 export default function useGetTrends({ timeRange }: Props) {
     const { accessToken, reuthenticate } = useAuthContext();
+    const queryClient = useQueryClient();
     return useQuery<Trends, AxiosError>({
         queryKey: ["trends", timeRange],
         queryFn: async () => {
@@ -26,7 +27,11 @@ export default function useGetTrends({ timeRange }: Props) {
         },
         onError: (err) => {
             if (err && err?.response?.status == 401) {
-                reuthenticate();
+                reuthenticate().then((response) => {
+                    if (response.isSuccess) {
+                        queryClient.refetchQueries(["trends", timeRange]);
+                    }
+                });
             }
         },
         enabled: !!accessToken,
