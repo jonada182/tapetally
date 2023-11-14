@@ -6,11 +6,15 @@ import puppeteer from "puppeteer";
 async function getBrowser() {
     if (process.env.NODE_ENV === "production") {
         return puppeteer.launch({
-            args: [...Chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+            args: [
+                ...Chromium.args,
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+            ],
             defaultViewport: Chromium.defaultViewport,
             executablePath: await Chromium.executablePath(),
             headless: "new",
-          })
+        });
     }
     return puppeteer.launch({ headless: "new" });
 }
@@ -32,7 +36,7 @@ export async function GET(request: NextRequest) {
             const page = await browser.newPage();
             await page.setViewport({ width: 1080, height: 1920 });
             const decodedURL = decodeURIComponent(url);
-            console.log("Visiting URL:", decodedURL)
+            console.log("Visiting URL:", decodedURL);
             await page.goto(decodedURL + "&token=" + accessToken);
             await page.waitForNetworkIdle();
             await page.waitForSelector("#puppeteer-artists", {

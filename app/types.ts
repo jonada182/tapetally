@@ -15,6 +15,12 @@ export enum TimeRange {
     Long = "long_term",
 }
 
+export const timeRangeLabels = {
+    [TimeRange.Short]: "last 30 days",
+    [TimeRange.Medium]: "last 6 months",
+    [TimeRange.Long]: "last year",
+};
+
 export type ArtistsAPIResponse = {
     items: Artist[];
 };
@@ -71,10 +77,12 @@ export type Track = {
     album: Album;
     artists: Artist[];
     external_urls: ExternalUrl;
+    uri: string;
 };
 
 export const trackMapper = (track: Track): Track => ({
     id: track.id,
+    uri: track.uri,
     name: track.name,
     href: track.href,
     external_urls: track.external_urls,

@@ -13,6 +13,7 @@ type AuthContextType = {
     isAuthenticated: boolean;
     error: AxiosError | null;
     isLoading: boolean;
+    logOut: () => void;
     reuthenticate: () => Promise<QueryObserverResult>;
 };
 
@@ -34,12 +35,20 @@ export const AuthContextProvider = ({ children }: Props) => {
         refresh,
     } = useGetToken({ code: authCode, refreshToken: refreshToken });
 
+    const logOut = () => {
+        setAccessToken(null);
+        setRefreshToken(null);
+        sessionStorage.removeItem("access_token");
+        sessionStorage.removeItem("refresh_token");
+    };
+
     useEffect(() => {
         const storedAccessToken = sessionStorage.getItem("access_token");
         const storedRefreshToken = sessionStorage.getItem("refresh_token");
         setAccessToken(storedAccessToken);
         setRefreshToken(storedRefreshToken);
     }, []);
+
     useEffect(() => {
         let replaceParams = false;
         const newSearchParams = new URLSearchParams(searchParams);
@@ -88,10 +97,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
     useEffect(() => {
         if (error) {
-            setAccessToken(null);
-            setRefreshToken(null);
-            sessionStorage.removeItem("access_token");
-            sessionStorage.removeItem("refresh_token");
+            logOut();
         }
     }, [error]);
 
@@ -101,6 +107,7 @@ export const AuthContextProvider = ({ children }: Props) => {
             isAuthenticated: !!accessToken,
             error: error,
             isLoading: isLoading,
+            logOut,
             reuthenticate: refresh,
         }),
         [accessToken, error, isLoading, refresh],

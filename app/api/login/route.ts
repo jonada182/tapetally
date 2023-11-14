@@ -4,6 +4,8 @@ import { randomBytes } from "crypto";
 import { HttpStatusCode } from "axios";
 import { handleErrorResponse } from "@/app/api/utils";
 
+export const revalidate = 0;
+
 const generateRandomString = (length: number) => {
     return randomBytes(Math.ceil(length / 2))
         .toString("hex")
@@ -21,24 +23,24 @@ export async function GET() {
 
     try {
         const state = generateRandomString(16);
-        const scope = "user-top-read";
+        const scope =
+            "user-top-read user-read-email playlist-modify-public ugc-image-upload";
         const redirectURI = process.env.SPOTIFY_REDIRECT_URI;
 
         if (process.env.MOCK_API === "true") {
             return NextResponse.redirect(redirectURI + "?code=test");
         }
-
-        return NextResponse.redirect(
+        const authURL =
             "https://accounts.spotify.com/authorize?" +
-                querystring.stringify({
-                    response_type: "code",
-                    client_id: process.env.SPOTIFY_CLIENT_ID,
-                    scope: scope,
-                    redirect_uri: redirectURI,
-                    state: state,
-                }),
-            301,
-        );
+            querystring.stringify({
+                response_type: "code",
+                client_id: process.env.SPOTIFY_CLIENT_ID,
+                scope: scope,
+                redirect_uri: redirectURI,
+                state: state,
+                // show_dialog: true,
+            });
+        return NextResponse.redirect(authURL, 301);
     } catch (error: any) {
         return handleErrorResponse(error);
     }

@@ -13,6 +13,7 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import Loading from "@/components/shared/Loading";
 import { useExportImage } from "@/hooks/useExportImage";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSpotifyPlaylist } from "@/hooks/useSpotifyPlaylist";
 
 export default function Home() {
     const pathname = usePathname();
@@ -34,10 +35,17 @@ export default function Home() {
     });
 
     const {
+        createSpotifyPlaylist,
+        progressMessage: spotifyPlaylistMessage,
+        error: spotifyPlaylistError,
+        isLoading: spotifyPlaylistIsLoading,
+    } = useSpotifyPlaylist();
+
+    const {
         exportImage,
         error: exportError,
         isLoading: exportIsLoading,
-    } = useExportImage({ timeRange: timeRange});
+    } = useExportImage({ timeRange: timeRange });
 
     const error = trendsError || authError || exportError;
 
@@ -48,11 +56,14 @@ export default function Home() {
         }
     }, [searchParams]);
 
-    const handleTimeRangeChange = useCallback((timeRange: TimeRange) => {
-        const params = new URLSearchParams()
-        params.set("time_range", timeRange)
-        router.push(`${pathname}?${params.toString()}`)
-    },[pathname, router])
+    const handleTimeRangeChange = useCallback(
+        (timeRange: TimeRange) => {
+            const params = new URLSearchParams();
+            params.set("time_range", timeRange);
+            router.push(`${pathname}?${params.toString()}`);
+        },
+        [pathname, router],
+    );
 
     if (authLoading) {
         return <Loading />;
@@ -88,27 +99,39 @@ export default function Home() {
                     {trendsIsLoading ? (
                         <Loading message="Loading Spotify trends..." />
                     ) : (
-                        <div className="flex flex-col md:flex-row gap-4 align-middle justify-stretch w-full">
-                            <Artists artists={trends?.artists} />
-                            <Tracks tracks={trends?.tracks} />
-                        </div>
-                    )}
-                    {isAuthenticated && (
-                        <div
-                            id="save-trends-container"
-                            className="flex justify-center"
-                        >
-                            <button
-                                className="disabled:animate-pulse transition-all px-4 py-2 mt-8 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
-                                onClick={() => exportImage()}
-                                disabled={exportIsLoading}
-                                title="Save this page as an image"
-                            >
-                                {exportIsLoading
-                                    ? "Saving trends..."
-                                    : "Save my trends"}
-                            </button>
-                        </div>
+                        <>
+                            <div className="flex flex-col md:flex-row gap-4 align-middle justify-stretch w-full">
+                                <Artists artists={trends?.artists} />
+                                <Tracks tracks={trends?.tracks} />
+                            </div>
+                            {isAuthenticated && trends?.tracks && (
+                                <div
+                                    id="save-trends-container"
+                                    className="flex flex-col align-middle justify-center gap-4 mt-8"
+                                >
+                                    <button
+                                        className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
+                                        onClick={() =>
+                                            createSpotifyPlaylist({
+                                                timeRange,
+                                                tracks: trends?.tracks,
+                                                topArtist: trends?.artists[0],
+                                            })
+                                        }
+                                        disabled={spotifyPlaylistIsLoading}
+                                    >
+                                        {spotifyPlaylistIsLoading
+                                            ? "Creating Mixtape..."
+                                            : "Create Mixtape"}
+                                    </button>
+                                    {spotifyPlaylistMessage && (
+                                        <div className="p-4 text-center font-mono animate-pulse">
+                                            {spotifyPlaylistMessage}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </>
                     )}
                 </>
             )}

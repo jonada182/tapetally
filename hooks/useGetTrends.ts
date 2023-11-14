@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function useGetTrends({ timeRange }: Props) {
-    const { accessToken, reuthenticate } = useAuthContext();
+    const { accessToken, reuthenticate, logOut } = useAuthContext();
     const queryClient = useQueryClient();
     return useQuery<Trends, AxiosError>({
         queryKey: ["trends", timeRange],
@@ -27,11 +27,7 @@ export default function useGetTrends({ timeRange }: Props) {
         },
         onError: (err) => {
             if (err && err?.response?.status == 401) {
-                reuthenticate().then((response) => {
-                    if (response.isSuccess) {
-                        queryClient.refetchQueries(["trends", timeRange]);
-                    }
-                });
+                reuthenticate();
             }
         },
         enabled: !!accessToken,

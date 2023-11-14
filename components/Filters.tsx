@@ -1,16 +1,10 @@
-import { TimeRange } from "@/app/types";
+import { TimeRange, timeRangeLabels } from "@/app/types";
 import React, { memo, useEffect, useRef, useState } from "react";
 
 type Props = {
     timeRange: TimeRange;
     // eslint-disable-next-line no-unused-vars
     handleOnClick: (timeRange: TimeRange) => void;
-};
-
-const timeRangeLabels = {
-    [TimeRange.Short]: "last 30 days",
-    [TimeRange.Medium]: "last 6 months",
-    [TimeRange.Long]: "last year",
 };
 
 const Filters = (props: Props) => {

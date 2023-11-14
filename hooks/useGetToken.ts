@@ -46,7 +46,7 @@ export default function useGetToken({ code, refreshToken }: Props) {
             return response.data;
         },
         onSuccess: () => {
-            queryClient.resetQueries(["token"]);
+            queryClient.resetQueries();
         },
         enabled: false,
     });
