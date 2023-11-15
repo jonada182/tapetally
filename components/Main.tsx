@@ -11,11 +11,11 @@ type Props = {
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            retry: 3,
+            retry: false,
             retryOnMount: false,
             refetchOnWindowFocus: false,
             cacheTime: 30 * 60 * 1000,
-            staleTime: 15 * 60 * 1000,
+            staleTime: 10 * 60 * 1000,
             onError: (error: any) => {
                 console.error("Query error:", error.message);
             },

@@ -9,8 +9,8 @@ import {
     artistMapper,
     trackMapper,
 } from "@/app/types";
-import data from "./data.json";
 import { handleErrorResponse } from "@/app/api/utils";
+import data from "./data.json";
 
 type RequestParams = {
     params: {

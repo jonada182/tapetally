@@ -2,18 +2,17 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { HttpStatusCode } from "axios";
+import useGetTrends from "@/hooks/useGetTrends";
+import { useSpotifyPlaylist } from "@/hooks/useSpotifyPlaylist";
+import { useAuthContext } from "@/contexts/AuthContext";
 import Tracks from "@/components/Tracks";
 import Artists from "@/components/Artists";
-import useGetTrends from "@/hooks/useGetTrends";
+import Filters from "@/components/Filters";
+import Loading from "@/components/shared/Loading";
 import { TimeRange } from "./types";
 import SpotifyLogo from "@/public/img/spotify.png";
-import Filters from "@/components/Filters";
-import { useAuthContext } from "@/contexts/AuthContext";
-import Loading from "@/components/shared/Loading";
-import { useExportImage } from "@/hooks/useExportImage";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useSpotifyPlaylist } from "@/hooks/useSpotifyPlaylist";
 
 export default function Home() {
     const pathname = usePathname();
@@ -36,18 +35,13 @@ export default function Home() {
 
     const {
         createSpotifyPlaylist,
+        playlistData,
         progressMessage: spotifyPlaylistMessage,
         error: spotifyPlaylistError,
         isLoading: spotifyPlaylistIsLoading,
     } = useSpotifyPlaylist();
 
-    const {
-        exportImage,
-        error: exportError,
-        isLoading: exportIsLoading,
-    } = useExportImage({ timeRange: timeRange });
-
-    const error = trendsError || authError || exportError;
+    const error = trendsError || authError || spotifyPlaylistError;
 
     useEffect(() => {
         const timeRangeParam = searchParams.get("time_range");
@@ -109,21 +103,39 @@ export default function Home() {
                                     id="save-trends-container"
                                     className="flex flex-col align-middle justify-center gap-4 mt-8"
                                 >
-                                    <button
-                                        className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
-                                        onClick={() =>
-                                            createSpotifyPlaylist({
-                                                timeRange,
-                                                tracks: trends?.tracks,
-                                                topArtist: trends?.artists[0],
-                                            })
-                                        }
-                                        disabled={spotifyPlaylistIsLoading}
-                                    >
-                                        {spotifyPlaylistIsLoading
-                                            ? "Creating Mixtape..."
-                                            : "Create Mixtape"}
-                                    </button>
+                                    {!spotifyPlaylistMessage &&
+                                        !spotifyPlaylistIsLoading &&
+                                        !playlistData && (
+                                            <button
+                                                className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
+                                                onClick={() =>
+                                                    createSpotifyPlaylist({
+                                                        timeRange,
+                                                        tracks: trends?.tracks,
+                                                        topArtist:
+                                                            trends?.artists[0],
+                                                    })
+                                                }
+                                                disabled={
+                                                    spotifyPlaylistIsLoading
+                                                }
+                                            >
+                                                Create Mixtape
+                                            </button>
+                                        )}
+                                    {playlistData && (
+                                        <Link
+                                            className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
+                                            href={
+                                                playlistData.external_urls
+                                                    .spotify
+                                            }
+                                            target="_blank"
+                                            prefetch={false}
+                                        >
+                                            Open My Mixtape
+                                        </Link>
+                                    )}
                                     {spotifyPlaylistMessage && (
                                         <div className="p-4 text-center font-mono animate-pulse">
                                             {spotifyPlaylistMessage}

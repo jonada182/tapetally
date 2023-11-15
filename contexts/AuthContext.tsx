@@ -30,8 +30,9 @@ export const AuthContextProvider = ({ children }: Props) => {
     const [authCode, setAuthCode] = useState<string | null>(null);
     const {
         data: tokenData,
-        error: error,
-        isLoading: isLoading,
+        error,
+        refreshError,
+        isLoading,
         refresh,
     } = useGetToken({ code: authCode, refreshToken: refreshToken });
 
@@ -96,10 +97,10 @@ export const AuthContextProvider = ({ children }: Props) => {
     }, [tokenData]);
 
     useEffect(() => {
-        if (error) {
+        if (error || refreshError) {
             logOut();
         }
-    }, [error]);
+    }, [error, refreshError]);
 
     const contextValues: AuthContextType = useMemo(
         () => ({

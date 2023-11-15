@@ -1,7 +1,7 @@
 import axios, { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
-import { UserAccessToken } from "@/app/types";
 import { handleErrorResponse } from "@/app/api/utils";
+import { UserAccessToken } from "@/app/types";
 
 const apiUrl = "https://accounts.spotify.com/api/token";
 

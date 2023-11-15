@@ -34,30 +34,30 @@ export type Trends = {
     tracks: Track[];
 };
 
-export type Image = {
+export interface Image {
     url: string;
-};
+}
 
-export type ExternalUrl = {
+export interface ExternalUrl {
     spotify: string;
-};
+}
 
-export type Album = {
+export interface Album {
     id: string;
     name: string;
     href: string;
     images?: Image[];
     external_urls: ExternalUrl;
-};
+}
 
-export type Artist = {
+export interface Artist {
     id: string;
     name: string;
     href: string;
     external_urls: ExternalUrl;
     genres?: string[];
     images?: Image[];
-};
+}
 
 export const artistMapper = (artist: Artist): Artist => ({
     id: artist.id,
@@ -70,7 +70,7 @@ export const artistMapper = (artist: Artist): Artist => ({
     })),
 });
 
-export type Track = {
+export interface Track {
     id: string;
     name: string;
     href: string;
@@ -78,7 +78,7 @@ export type Track = {
     artists: Artist[];
     external_urls: ExternalUrl;
     uri: string;
-};
+}
 
 export const trackMapper = (track: Track): Track => ({
     id: track.id,
@@ -97,3 +97,29 @@ export const trackMapper = (track: Track): Track => ({
     },
     artists: track.artists.map(artistMapper),
 });
+
+export interface SpotifyUserProfile {
+    id: string;
+    display_name: string;
+    email: string;
+    country: string;
+    href: string;
+    uri: string;
+    external_urls: {
+        spotify: string;
+    };
+}
+
+export interface SpotifyPlaylist {
+    id: string;
+    name: string;
+    description: string;
+    public: boolean;
+    href: string;
+    uri: string;
+    images: Image[];
+    tracks: Track[];
+    external_urls: {
+        spotify: string;
+    };
+}

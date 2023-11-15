@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from "react-query";
 import axios, { AxiosError } from "axios";
 import { UserAccessToken } from "@/app/types";
-import { useMemo } from "react";
 
 type Props = {
     code?: string | null;
@@ -53,7 +52,8 @@ export default function useGetToken({ code, refreshToken }: Props) {
 
     return {
         data: refreshTokenData ? refreshTokenData : accessTokenData,
-        error: accessTokenError || refreshTokenError,
+        error: accessTokenError,
+        refreshError: refreshTokenError,
         isLoading: accessTokenLoading || refreshTokenLoading,
         refresh,
     };
