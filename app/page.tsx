@@ -18,7 +18,7 @@ export default function Home() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Medium);
+    const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.Long);
     const {
         isAuthenticated,
         isLoading: authLoading,

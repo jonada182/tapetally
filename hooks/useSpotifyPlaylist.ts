@@ -53,8 +53,9 @@ export const useSpotifyPlaylist = () => {
                     .createPublicPlaylist(
                         user.id,
                         "My Mixtape",
-                        "My top songs from the " +
-                            timeRangeLabels[props.timeRange],
+                        `Relive your ${
+                            timeRangeLabels[props.timeRange]
+                        } with a nostalgic blend of your top tunes`,
                     )
                     .then((playlist) => {
                         setProgressMessage("Customizing new playlist");

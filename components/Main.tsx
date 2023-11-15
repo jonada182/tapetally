@@ -50,9 +50,9 @@ const Main = ({ children }: Props) => {
                         id="logo-container"
                         className="relative w-full px-4 mb-4 md:mb-8 flex flex-col justify-center items-center"
                     >
-                        <h1 className="text-4xl md:text-5xl">tapetally</h1>
+                        <h1 className="text-6xl">tapetally</h1>
                         <p className="font-mono uppercase text-xs">
-                            Spotify trends on a retro spin
+                            Your Spotify Rewind in a Mixtape
                         </p>
                     </div>
                     <div className="w-full flex justify-center">{children}</div>
