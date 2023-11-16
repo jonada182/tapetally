@@ -9,7 +9,7 @@ const inter = Permanent_Marker({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
     title: "TapeTally",
-    description: "Spotify trends on a retro spin",
+    description: "Your Spotify Rewind in a Mixtape",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Suspense fallback={<Loading/>}>
+                <Suspense fallback={<Loading />}>
                     <Main>{children}</Main>
                 </Suspense>
             </body>
