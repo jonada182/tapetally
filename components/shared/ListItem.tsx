@@ -16,11 +16,11 @@ const ListItem = (props: Props) => {
         <Link
             href={props.url}
             target="_blank"
-            className="list-item-container z-20 flex gap-4 items-center group"
+            className="list-item-container group z-20 flex items-center gap-4"
         >
-            <div className="text-black w-4">{props.index}</div>
+            <div className="w-4 text-black">{props.index}</div>
             {props.imageUrl && (
-                <div className="relative flex flex-col items-center justify-end w-3/12 aspect-square">
+                <div className="relative flex aspect-square w-3/12 flex-col items-center justify-end">
                     <Image
                         src={props.imageUrl}
                         alt=""
@@ -29,20 +29,11 @@ const ListItem = (props: Props) => {
                         loading="eager"
                         priority={true}
                         unoptimized={true}
-                        className="object-cover w-full h-full absolute top-0 left-0 z-0 shadow-md shadow-black/30 group-hover:grayscale"
+                        className="absolute left-0 top-0 z-0 h-full w-full object-cover shadow-md shadow-black/30"
                     />
-                    <Image
-                        src={SpotifyLogo}
-                        alt="Spotify"
-                        width={24}
-                        height={24}
-                        className="z-20 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-1/2 duration-300"
-                    />
-                    <VintageFilter />
-                    <div className="absolute transition-all duration-300 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent group-hover:opacity-75 opacity-0"></div>
                 </div>
             )}
-            <h3 className="transition-all flex-grow text-lg leading-5 group-hover:text-amber-800 w-8/12">
+            <h3 className="w-8/12 flex-grow text-lg leading-5 transition-all group-hover:text-amber-800">
                 {props.name}
             </h3>
         </Link>

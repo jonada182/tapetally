@@ -23,6 +23,7 @@ export default function Home() {
         isAuthenticated,
         isLoading: authLoading,
         error: authError,
+        logOut,
     } = useAuthContext();
 
     const {
@@ -66,11 +67,11 @@ export default function Home() {
     return (
         <div
             id="page-container"
-            className="flex h-full max-w-6xl w-full flex-col justify-stretch items-center"
+            className="flex h-full w-full max-w-6xl flex-col items-center justify-stretch"
         >
             {!isAuthenticated ? (
                 <Link
-                    className="h-12 font-sans min-w-max px-6 text-white bg-green-500 hover:bg-green-600 rounded flex gap-2 items-center"
+                    className="flex h-12 min-w-max items-center gap-2 rounded bg-green-500 px-6 font-sans text-white hover:bg-green-600"
                     href="/api/login"
                     prefetch={false}
                     id="spotify-login-btn"
@@ -94,20 +95,20 @@ export default function Home() {
                         <Loading message="Loading Spotify trends..." />
                     ) : (
                         <>
-                            <div className="flex flex-col md:flex-row gap-4 align-middle justify-stretch w-full">
+                            <div className="flex w-full flex-col justify-stretch gap-4 align-middle md:flex-row">
                                 <Artists artists={trends?.artists} />
                                 <Tracks tracks={trends?.tracks} />
                             </div>
                             {isAuthenticated && trends?.tracks && (
                                 <div
                                     id="save-trends-container"
-                                    className="flex flex-col align-middle justify-center gap-4 mt-8"
+                                    className="mt-8 flex flex-col justify-center gap-4 align-middle"
                                 >
                                     {!spotifyPlaylistMessage &&
                                         !spotifyPlaylistIsLoading &&
                                         !playlistData && (
                                             <button
-                                                className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
+                                                className="px-4 py-2 text-2xl text-vintage-dark transition-all hover:bg-vintage-dark hover:text-white disabled:animate-pulse"
                                                 onClick={() =>
                                                     createSpotifyPlaylist({
                                                         timeRange,
@@ -125,7 +126,7 @@ export default function Home() {
                                         )}
                                     {playlistData && (
                                         <Link
-                                            className="disabled:animate-pulse transition-all px-4 py-2 text-vintage-dark text-2xl hover:text-white hover:bg-vintage-dark"
+                                            className="px-4 py-2 text-2xl text-vintage-dark transition-all hover:bg-vintage-dark hover:text-white disabled:animate-pulse"
                                             href={
                                                 playlistData.external_urls
                                                     .spotify
@@ -137,7 +138,7 @@ export default function Home() {
                                         </Link>
                                     )}
                                     {spotifyPlaylistMessage && (
-                                        <div className="p-4 text-center font-mono animate-pulse">
+                                        <div className="animate-pulse p-4 text-center font-mono">
                                             {spotifyPlaylistMessage}
                                         </div>
                                     )}
@@ -149,10 +150,18 @@ export default function Home() {
             )}
             {error &&
                 error.response?.status !== HttpStatusCode.Unauthorized && (
-                    <div className="p-4 my-8 font-mono uppercase text-sm flex justify-center align-middle bg-red-100 text-red-900 w-full">
+                    <div className="my-8 flex w-full justify-center bg-red-100 p-4 align-middle font-mono text-sm uppercase text-red-900">
                         {`Oops! An error has ocurred`}
                     </div>
                 )}
+            {isAuthenticated && (
+                <button
+                    onClick={() => logOut()}
+                    className="my-4 bg-vintage-dark px-4 py-2 font-mono text-sm text-vintage-white transition-all hover:bg-vintage-brown"
+                >
+                    Log out
+                </button>
+            )}
         </div>
     );
 }

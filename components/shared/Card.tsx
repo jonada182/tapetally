@@ -15,10 +15,10 @@ const Card = (props: Props) => {
         <Link
             href={props.url}
             target="_blank"
-            className="card-container bg-black group flex flex-col w-full max-w-sm h-full aspect-[4/5] items-stretch justify-end relative z-10 shadow-md shadow-vintage-dark/30 border-x-[12px] border-t-[12px] border-white"
+            className="card-container group relative z-10 flex aspect-[4/5] h-full w-full max-w-sm flex-col items-stretch justify-end border-x-[12px] border-t-[12px] border-white bg-black shadow-md shadow-vintage-dark/30"
         >
             {props.imageUrl && (
-                <div className="relative flex flex-col items-center justify-end w-full h-4/5 aspect-square overflow-hidden">
+                <div className="relative flex aspect-square h-4/5 w-full flex-col items-center justify-end overflow-hidden">
                     <Image
                         src={props.imageUrl}
                         alt={props.title}
@@ -27,21 +27,12 @@ const Card = (props: Props) => {
                         loading="eager"
                         priority={true}
                         unoptimized={true}
-                        className="w-full h-full transition-all duration-300 group-hover:scale-110 absolute object-cover object-center z-0"
+                        className="absolute z-0 h-full w-full object-cover object-center transition-all duration-300"
                     />
-                    <Image
-                        src={SpotifyLogo}
-                        alt="Spotify"
-                        width={36}
-                        height={36}
-                        className="z-20 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-1/2 duration-300"
-                    />
-                    <div className="absolute transition-all duration-300 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent group-hover:opacity-75 opacity-0"></div>
                 </div>
             )}
-            <VintageFilter />
-            <div className="flex flex-col gap-1 items-center justify-center relative h-1/5 z-20 bg-white">
-                <h3 className="max-w-sm text-lg md:text-xl md:leading-5 lg:text-2xl lg:leading-6 leading-4 z-20 text-center">
+            <div className="relative z-20 flex h-1/5 flex-col items-center justify-center gap-1 bg-white">
+                <h3 className="z-20 max-w-sm text-center text-lg leading-4 transition-all group-hover:text-amber-800 md:text-xl md:leading-5 lg:text-2xl lg:leading-6">
                     {props.title}
                 </h3>
             </div>
